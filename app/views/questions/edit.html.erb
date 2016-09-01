@@ -1,0 +1,758 @@
+<%= render 'layerbegin' %>
+<script>
+    $(document).ready(function(){
+        var ischeck;
+        var tixingcheck;
+        $('#smt').click(function(){
+            ischeck="";
+            $('.leixing:checked').each(function(){
+
+
+                ischeck+=$(this).val()+":";
+
+            });
+            if(ischeck.length>0)
+            {
+                ischeck=ischeck.substring(0,ischeck.length-1);
+            }
+            //alert(ischeck);
+            //return false;
+            $('#driverlicensetype').val(ischeck);
+
+
+
+            tixingcheck='';
+            $('.tixing:checked').each(function(){
+
+
+                tixingcheck+=$(this).val()+":";
+
+            });
+            if(tixingcheck.length>0)
+            {
+                tixingcheck=tixingcheck.substring(0,tixingcheck.length-1);
+            }
+            //alert(ischeck);
+            //return false;
+            $('#questiontype').val(tixingcheck);
+
+
+
+
+var recpt=false;
+            var resub=false;
+            if($('#chapterid').val()=='0')
+            {
+
+                $('#chaptererr').removeClass("hiddenerr");
+                $('#chaptererr').addClass("showerr");
+                recpt=false;
+            }
+            else
+            {
+                $('#chaptererr').removeClass("showerr");
+                $('#chaptererr').addClass("hiddenerr");
+                recpt=true;
+
+            }
+            if($('#subjectid').val()=='0')
+            {
+
+                $('#subjecterr').removeClass("hiddenerr");
+                $('#subjecterr').addClass("showerr");
+                resub=false;
+            }else
+            {
+                $('#subjecterr').removeClass("showerr");
+                $('#subjecterr').addClass("hiddenerr");
+                resub=true;
+            }
+if(!(recpt && resub))
+{
+    return false;
+}
+
+
+
+        });
+
+
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+
+
+        var mycheck = $('#driverlicensetype').val().split(':');
+        //alert(mycheck);
+
+        $.each( mycheck, function(i, n){
+            if(n=='C1') {
+                $('#C1').iCheck('check');
+            }
+            if(n=='C2') {
+                $('#C2').iCheck('check');
+            }
+            if(n=='C3') {
+                $('#C3').iCheck('check');
+            }
+            if(n=='C4') {
+                $('#C4').iCheck('check');
+            }
+
+
+
+            if(n=='A1') {
+                $('#A1').iCheck('check');
+            }
+
+            if(n=='A3') {
+                $('#A3').iCheck('check');
+            }
+
+            if(n=='B1') {
+                $('#B1').iCheck('check');
+            }
+
+
+
+            if(n=='A2') {
+                $('#A2').iCheck('check');
+            }
+            if(n=='B2') {
+                $('#B2').iCheck('check');
+            }
+            if(n=='D') {
+                $('#D').iCheck('check');
+            }
+
+            if(n=='E') {
+                $('#E').iCheck('check');
+            }
+            if(n=='F') {
+                $('#F').iCheck('check');
+            }
+            if(n=='HF') {
+                $('#HF').iCheck('check');
+            }
+
+        });
+
+
+
+
+
+
+
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+
+
+
+
+        $('.answer').on('ifChecked', function(event){
+            var myid = this.id;
+            myid=myid.substring(1,myid.length);
+            $.ajax({
+                type: 'get',
+                url: '/answers/changeanswer?change='+myid+'&status=1'
+            });
+
+        });
+
+        $('.answer').on('ifUnchecked', function(event){
+            var myid = this.id;
+            myid=myid.substring(1,myid.length);
+            $.ajax({
+                type: 'get',
+                url: '/answers/changeanswer?change='+myid+'&status=0'
+            });
+        });
+
+        var typecheck = $('#questiontype').val().split(':');
+        //alert(mycheck);
+
+        $.each( typecheck, function(i, n){
+            if(n=='XZ') {
+                $('#XZ').iCheck('check');
+            }
+            if(n=='TP') {
+                $('#TP').iCheck('check');
+            }
+            if(n=='FTP') {
+                $('#FTP').iCheck('check');
+            }
+
+
+
+
+            if(n=='PD') {
+                $('#PD').iCheck('check');
+            }
+
+            if(n=='SS') {
+                $('#SS').iCheck('check');
+            }
+
+            if(n=='XD') {
+                $('#XD').iCheck('check');
+            }
+
+
+
+            if(n=='QJ') {
+                $('#QJ').iCheck('check');
+            }
+            if(n=='BZ') {
+                $('#BZ').iCheck('check');
+            }
+            if(n=='XC') {
+                $('#XC').iCheck('check');
+            }
+
+
+        });
+
+
+
+
+        $('#XZ').on('ifChecked',function(event){
+            $('#PD').iCheck('uncheck');
+            $('#xzdiv').removeClass('hiddenerr');
+            $('#xzdiv').addClass('showerr');
+            $('#pddiv').removeClass('showerr');
+            $('#pddiv').addClass('hiddenerr');
+            $('#XD').iCheck('uncheck');
+            $('#XC').iCheck('uncheck');
+            $('#XD').iCheck('disable');
+            $('#XC').iCheck('disable');
+        });
+        $('#PD').on('ifChecked',function(event){
+            $('#XZ').iCheck('uncheck');
+            $('#XD').iCheck('check');
+            $('#XC').iCheck('uncheck');
+            $('#XD').iCheck('enable');
+            $('#XC').iCheck('enable');
+            $('#pddiv').removeClass('hiddenerr');
+            $('#pddiv').addClass('showerr');
+            $('#xzdiv').removeClass('showerr');
+            $('#xzdiv').addClass('hiddenerr');
+        });
+        $('#TP').on('ifChecked',function(event){
+            $('#FTP').iCheck('uncheck');
+        });
+        $('#FTP').on('ifChecked',function(event){
+            $('#TP').iCheck('uncheck');
+        });
+        $('#YES').on('ifChecked',function(event){
+            $('#NO').iCheck('uncheck');
+            $('#XD').iCheck('check');
+            $('#XC').iCheck('uncheck');
+            $('#isjudge').val(1);
+        });
+        $('#NO').on('ifChecked',function(event){
+            $('#YES').iCheck('uncheck');
+            $('#XC').iCheck('check');
+            $('#XD').iCheck('uncheck');
+            $('#isjudge').val(0);
+        });
+
+
+        $('#XD').on('ifChecked',function(event){
+            $('#XC').iCheck('uncheck');
+            $('#NO').iCheck('uncheck');
+            $('#YES').iCheck('check');
+            $('#isjudge').val(1);
+        });
+        $('#XC').on('ifChecked',function(event){
+            $('#XD').iCheck('uncheck');
+            $('#NO').iCheck('check');
+            $('#YES').iCheck('uncheck');
+            $('#isjudge').val(0);
+        });
+
+
+
+
+
+if($('#isjudge').val()=='')
+{
+    $('#isjudge').val('1');
+}
+        var qt =$('#questiontype').val();
+        if (qt!='')
+        {
+            var myqt = qt.split(':');
+            $(myqt).each(function(index,item){
+                switch (item)
+                {
+                    case 'XZ':
+                        $('#XZ').iCheck('check');
+                            $('#XD').iCheck('disable');
+                        $('#XC').iCheck('disable');
+                        $('#xzdiv').removeClass('hiddenerr');
+                        $('#xzdiv').addClass('showerr');
+                        break;
+                    case 'PD':
+                        $('#PD').iCheck('check');
+                        $('#pddiv').removeClass('hiddenerr');
+                        $('#pddiv').addClass('showerr');
+                        if($('#isjudge').val()=='1')
+                        {
+                            $('#XD').iCheck('check');
+                            $('#YES').iCheck('check');
+                        }else
+                        {
+                            $('#XC').iCheck('check');
+                            $('#NO').iCheck('check');
+                        }
+                        break;
+                    case 'TP':
+                        $('#TP').iCheck('check');
+                    case 'FTP':
+                        $('#FTP').iCheck('check');
+                    case 'SS':
+                        $('#SS').iCheck('check');
+                    case 'BZ':
+                        $('#BZ').iCheck('check');
+                    case 'QJ':
+                        $('#QJ').iCheck('check');
+
+                }
+
+            });
+        }
+
+        if($('#questiontype').val()=='')
+        {
+            $('#XZ').iCheck('check');
+            $('#XD').iCheck('disable');
+            $('#XC').iCheck('disable');
+            $('#xzdiv').removeClass('hiddenerr');
+            $('#xzdiv').addClass('showerr');
+        }
+
+
+
+
+
+$('#img1').attr('src',$('#questionimageurl').val());
+
+
+
+
+        $('#chapter').change(function(){
+            $('#chapterid').val($("#chapter").val());
+        });
+        $("#chapter ").val($('#chapterid').val());
+
+
+        $('#subject').change(function(){
+            $('#subjectid').val($("#subject").val());
+        });
+        $("#subject ").val($('#subjectid').val());
+
+
+        if($('#chapterid').val()=='')
+        {
+            $('#chapterid').val('0');
+        }
+        $('#chapter').val($('#chapterid').val());
+
+
+
+        if($('#subjectid').val()=='')
+        {
+            $('#subjectid').val('0');
+        }
+        $('#subject').val($('#subjectid').val());
+
+
+
+
+
+    });
+
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#img1')
+                        .attr('src', e.target.result)
+                //.width(300)
+                //.height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+</script>
+
+
+<style type="text/css">
+    .showerr{
+        display: block;
+    }
+    .hiddenerr{
+        display: none;
+    }
+</style>
+
+
+<div class="ibox-content form-horizontal m-t" style="height: 1000px;">
+  <div class="col-md-8">
+
+
+
+    <input type="hidden" id="questionimageurl" value=<%= @question.questionimage.url %>>
+
+
+
+
+    <%= form_for(@question,:html => {:class=>'form-horizontal m-t',:multipart => true}) do |f| %>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">题目内容：</label>
+          <div class="col-sm-9">
+            <%= f.text_area :questionname,rows:'5',class:"form-control" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">图片：</label>
+          <div class="col-sm-9">
+            <%= f.file_field :questionimage,class:'form-control',:onchange => "readURL(this)" %>
+          </div>
+        </div>
+
+        <%= f.hidden_field :isnew ,value:'0' %>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">声音：</label>
+          <div class="col-sm-9">
+            <%= f.file_field :voice,class:'form-control' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">声音播放：</label>
+          <div class="col-sm-9">
+
+<%= f.hidden_field :isjudge,id:'isjudge' %>
+
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">章节：</label>
+
+          <div class="col-sm-9">
+            <select class="form-control m-b" id="chapter">
+
+              <option value="0">选择章节</option>
+              <% @chapters.each do |chapter| %>
+              <option value=<%= chapter.id %>>
+                    <%= chapter.chapter %>
+              </option>
+              <% end %>
+            </select>
+            <div id="chaptererr" class="hiddenerr"><span style="color: red;">请选择章节</span></div>
+          </div>
+        </div>
+
+        <%= f.hidden_field :chapter_id,id:'chapterid' %>
+
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">学科：</label>
+
+          <div class="col-sm-9">
+            <select class="form-control m-b" id="subject">
+              <option value="0">选择学科</option>
+              <% @subjects.each do |subject| %>
+                  <option value=<%= subject.id %>>
+                    <%= subject.subject %>
+                  </option>
+              <% end %>
+            </select>
+            <div id="subjecterr" class="hiddenerr"><span style="color: red;">请选择学科</span></div>
+          </div>
+        </div>
+
+        <%= f.hidden_field :subject_id,id:'subjectid' %>
+
+
+
+
+
+        <%= f.hidden_field :driverlicensetype,id:'driverlicensetype' %>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">驾照类型：</label>
+          <div class="col-sm-9">
+            <div class="col-sm-12">
+              <table>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="C1" value="C1" class="leixing"> <i></i> C1</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="C2" value="C2" class="leixing"> <i></i> C2</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="C3" value="C3" class="leixing"> <i></i> C3</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="C4" value="C4" class="leixing"> <i></i> C4</label>
+                  </div>
+                </td>
+              </table>
+            </div>
+            <div class="col-sm-12">
+              <table>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="A1" value="A1" class="leixing"> <i></i> A1</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="A3" value="A3" class="leixing"> <i></i> A3</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="B1" value="B1" class="leixing"> <i></i> B1</label>
+                  </div>
+                </td>
+              </table>
+            </div>
+
+            <div class="col-sm-12">
+              <table>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="A2" value="A2" class="leixing"> <i></i> A2</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="B2" value="B2" class="leixing"> <i></i> B2</label>
+                  </div>
+                </td>
+              </table>
+            </div>
+
+            <div class="col-sm-12">
+              <table>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="D" value="D" class="leixing"> <i></i> D&nbsp;&nbsp;</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="E" value="E" class="leixing"> <i></i> E&nbsp;&nbsp;</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="F" value="F" class="leixing"> <i></i> F</label>
+                  </div>
+                </td>
+              </table>
+            </div>
+            <div class="col-sm-12">
+
+              <div class="icheckbox i-checks">
+                <label>
+                  <input type="checkbox" id="HF" value="HF" class="leixing"> <i></i> 恢复驾考</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <%= f.hidden_field :questiontype,id:'questiontype' %>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">题型选择：</label>
+          <div class="col-sm-9">
+            <div class="col-sm-12">
+              <table>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="XZ" value="XZ" class="tixing"> <i></i> 选择题</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </div>
+                </td>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="PD" value="PD" class="tixing"> <i></i> 判断题</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </div>
+                </td>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="TP" value="TP" class="tixing"> <i></i> 图片题</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </div>
+                </td>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="FTP" value="FTP" class="tixing"> <i></i> 非图片题</label>
+                  </div>
+                </td>
+              </table>
+            </div>
+            <div class="col-sm-12">
+              <table>
+
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="SS" value="SS" class="tixing"> <i></i> 手势题</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </div>
+                </td>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="BZ" value="BZ" class="tixing"> <i></i> 标志题</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </div>
+                </td>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="XD" value="XD" class="tixing"> <i></i> 选对的题</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                  </div>
+                </td>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="XC" value="XC" class="tixing"> <i></i> 选错的题</label>
+                  </div>
+                </td>
+              </table>
+            </div>
+            <div class="col-sm-12">
+              <table>
+                <td>
+                  <div class="icheckbox i-checks">
+                    <label>
+                      <input type="checkbox" id="QJ" value="QJ" class="tixing"> <i></i> 情景分析</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                  </div>
+                </td>
+              </table>
+            </div>
+          </div>
+        </div>
+
+<br>
+        <br>
+        <div class="form-group">
+          <label class="col-sm-2 control-label"></label>
+          <div class="col-sm-9">
+            <%= f.submit '确定',class: "btn btn-w-m btn-primary mylink pull-right",id:'smt','data-no-turbolink'=>true %>
+          </div>
+        </div>
+
+    <% end %>
+  </div>
+
+
+<h4>图片预览</h4>
+  <div class="hr-line-dashed col-sm-4" ></div>
+  <div class="text-center">
+<img id="img1" width="300">
+  </div>
+
+
+
+
+
+<h4>答案</h4>
+
+  <div class="hr-line-dashed col-sm-4" ></div>
+
+
+
+
+  <div class="hiddenerr" id="xzdiv">
+    <div class="col-sm-4">
+      <div class="icheckbox i-checks">
+        <% num =1 %>
+        <% @answers.each do |answer| %>
+            <%=num %>.&nbsp;<%= answer.asnwer %>&nbsp;
+            <%= link_to '', [answer.question,answer],class:'fa fa fa-close', method: :delete, data: { confirm: 'Are you sure?' } %>&nbsp; &nbsp;
+
+
+
+            <% if answer.isright == 1 %>
+                <input type="checkbox" id=<%= 'A'+answer.id.to_s %> class="answer" checked=""> <i></i> 正确<br>
+            <% else %>
+                <input type="checkbox" id=<%= 'A'+answer.id.to_s %> class="answer"> <i></i> 正确<br>
+            <% end %>
+
+
+
+            </a>
+            <br>
+            <% num = num +1 %>
+        <% end %>
+        <br>
+      </div>
+    </div>
+    <div>
+      <% if num <5 %>
+
+          <%= form_for([@question, @question.answers.build]) do |f| %>
+              <div class="form-group">
+                <div class="col-sm-4">
+                  <%= f.text_field :asnwer,class:'form-control'%>
+                  <%= f.hidden_field :isright,id:'isright',value:'0' %>
+                  <%= f.submit '添加答案',class: "btn btn-xs btn-primary mylink pull-right content",'data-no-turbolink'=>true %>
+                  <br>
+                  <br>
+                  <br>
+
+                </div>
+              </div>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="hiddenerr" id="pddiv">
+    <div class="col-sm-4">
+      <div class="icheckbox i-checks">
+        <input type="checkbox" id="YES" checked=""> <i></i> 正确<br><br>
+        <input type="checkbox" id="NO" > <i></i> 错误<br>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+<%= render 'layerend' %>
+
+

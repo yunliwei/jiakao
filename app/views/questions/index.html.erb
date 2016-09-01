@@ -1,0 +1,42 @@
+<%= render 'layerbegin' %>
+<div class="col-lg-12">
+  <div class="ibox float-e-margins">
+    <div class="ibox-title">
+      <h3>题目</h3>
+
+    </div>
+    <div class="ibox-content">
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+        <tr>
+          <th class="text-center">题目名称</th>
+
+          <th class="text-center">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @questions.each do |question| %>
+            <tr>
+              <td style="max-width:300px;"><%= question.questionname %></td>
+              <td>
+              <%= link_to '', edit_question_path(question),class:'fa fa-edit' %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <%= link_to '', question,class:'fa fa-trash', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+
+      <div class="text-center">
+
+        <%= will_paginate @questions, previous_label:'上一页', next_label: '下一页' %>
+      </div>
+      <%= link_to "新增", new_question_path,class: "btn btn-w-m btn-success mylink pull-right" ,'data-no-turbolink'=>true%>
+      <br>
+    </div>
+
+  </div>
+</div>
+
+
+<%= render 'layerend' %>

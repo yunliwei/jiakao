@@ -1,0 +1,122 @@
+<script>
+  $(document).ready(function(){
+
+
+      $("#new_admin").validate({
+          rules: {
+              'admin[adminname]': {
+                  required: true
+              },
+              'admin[login]': {
+                  required: true,
+                  minlength: 5,
+                  remote: {
+                      data: {
+                          login: function(){
+                              return $('#login').val();
+                          }
+                      },
+                      url: "/admins/chkrpt",
+                      type: "get"
+
+
+                  }
+              },
+              'admin[password]': {
+                  required: true,
+                  minlength: 5
+              },
+              'admin[password_confirmation]': {
+                  required: true,
+                  minlength: 5,
+                  equalTo: "#password"
+              }
+          },
+          messages: {
+
+              'admin[adminname]': {
+                  required: "请输入您的姓名"
+              },
+              'admin[login]': {
+                  required: "请输入您的用户名",
+                  minlength: "用户名必须5个字符以上",
+                  remote: "该账户已存在！"
+              },
+              'admin[password]': {
+                  required: "请输入您的密码",
+                  minlength: "密码必须5个字符以上"
+              },
+              'admin[password_confirmation]': {
+                  required: "请再次输入密码",
+                  minlength: "密码必须5个字符以上",
+                  equalTo: "两次输入的密码不一致"
+              }
+
+          }
+      });
+
+
+
+  });
+</script>
+
+
+
+
+<%= render 'layerbegin' %>
+
+<div class="ibox-content form-horizontal m-t">
+
+    <%= form_for(@admin,:html => {:class=>'form-horizontal m-t',:multipart => true}) do |f| %>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">姓名：</label>
+          <div class="col-sm-3">
+            <%= f.text_field :adminname,class:"form-control" %>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="form-group">
+          <label class="col-sm-5 control-label">用户名：</label>
+          <div class="col-sm-3">
+            <%= f.text_field :login,id:'login',class:"form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-5 control-label">密码：</label>
+          <div class="col-sm-3">
+            <%= f.password_field :password,id:'password',class:'form-control' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">确认密码：</label>
+          <div class="col-sm-3">
+            <%= f.password_field :password_confirmation,class:'form-control' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">权限：</label>
+          <div class="col-sm-3">
+            <%= f.text_field :auth,class:"form-control" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">状态：</label>
+          <div class="col-sm-3">
+            <%= f.text_field :status,class:"form-control" %>
+          </div>
+        </div>
+        <%= f.submit '确定',class: "btn btn-w-m btn-success mylink pull-right",id:'smt','data-no-turbolink'=>true %>
+        <br>
+    <% end %>
+</div>
+<%= render 'layerend' %>
+
+
+
+
+<%= link_to 'Back', admins_path %>

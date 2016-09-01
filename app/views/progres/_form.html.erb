@@ -1,0 +1,17 @@
+<%= form_for(@progre) do |f| %>
+  <% if @progre.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@progre.errors.count, "error") %> prohibited this progre from being saved:</h2>
+
+      <ul>
+      <% @progre.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

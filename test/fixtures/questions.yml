@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  questionname: MyString
+  isjudge: MyString
+  questionimage: MyString
+  voice: MyString
+  driverlicensetype: MyString
+  questiontype: MyString
+
+two:
+  questionname: MyString
+  isjudge: MyString
+  questionimage: MyString
+  voice: MyString
+  driverlicensetype: MyString
+  questiontype: MyString

@@ -1,0 +1,99 @@
+<div id="wrapper">
+  <nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+      <ul class="nav" id="side-menu">
+        <li class="nav-header">
+          <div class="dropdown profile-element"> <span>
+                             </span>
+            <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">管理员名称</strong>
+                             </span>  <span class="text-muted text-xs block">超级管理员（等级） <b class="caret"></b></span> </span>
+            </a>
+            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+
+              <li><a href="profile.html">个人资料</a>
+              </li>
+
+              <li class="divider"></li>
+              <li><%= link_to logins_path %>安全退出</a>
+              </li>
+            </ul>
+          </div>
+          <div class="logo-element">
+            H+
+          </div>
+        </li>
+        <li class="active">
+          <a href=""><i class="fa fa-user"></i> <span class="nav-label">题目</span><span class="fa arrow"></span> </a>
+          <ul class="nav nav-second-level">
+            <li>
+              <%= link_to '题目',questions_path %>
+            </li>
+            <li>
+              <%= link_to '章节',chapters_path %>
+            </li>
+            <li>
+              <%= link_to '学科',subjects_path %>
+            </li>
+            <li><a href="index_3.html">问题</a>
+            </li>
+            <li><a href="index_3.html">成绩</a>
+            </li>
+
+            <li><a href="index_3.html">其他</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href=""><i class="fa fa-user"></i> <span class="nav-label">管理员</span><span class="fa arrow"></span> </a>
+          <ul class="nav nav-second-level">
+            <li>
+              <%= link_to '管理员',admins_path %>
+            </li>
+          </ul>
+        </li>
+
+        <li class="active">
+          <a href=""><i class="fa fa-user"></i> <span class="nav-label">序列号</span><span class="fa arrow"></span> </a>
+          <ul class="nav nav-second-level">
+            <li>
+              <%= link_to '序列号',createlicenses_path %>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href=""><i class="fa fa-user"></i> <span class="nav-label">设置</span><span class="fa arrow"></span> </a>
+          <ul class="nav nav-second-level">
+            <li>
+            <li><a href="index_3.html">其他</a>
+            </li>
+
+
+
+          </ul>
+        </li>
+
+      </ul>
+
+    </div>
+  </nav>
+</div>
+<div id="page-wrapper" class="gray-bg dashbard-1">
+  <div class="row border-bottom">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+
+      <ul class="nav navbar-top-links navbar-right">
+        <li>
+          <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i class="fa fa-home"></i></a>驾校考试后台管理</span>
+        </li>
+
+
+        <li>
+          <a href="login">
+            <i class="fa fa-sign-out"></i> 退出
+          </a>
+        </li>
+      </ul>
+
+    </nav>
+  </div>

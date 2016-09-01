@@ -1,0 +1,41 @@
+<%= form_for(@question) do |f| %>
+  <% if @question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+      <ul>
+      <% @question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :questionname %><br>
+    <%= f.text_field :questionname,row:'10' %>
+  </div>
+  <div class="field">
+    <%= f.label :isjudge %><br>
+    <%= f.text_field :isjudge %>
+  </div>
+  <div class="field">
+    <%= f.label :questionimage %><br>
+    <%= f.text_field :questionimage %>
+  </div>
+  <div class="field">
+    <%= f.label :voice %><br>
+    <%= f.text_field :voice %>
+  </div>
+  <div class="field">
+    <%= f.label :driverlicensetype %><br>
+    <%= f.text_field :driverlicensetype %>
+  </div>
+  <div class="field">
+    <%= f.label :questiontype %><br>
+    <%= f.text_field :questiontype %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

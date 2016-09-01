@@ -1,0 +1,33 @@
+<%= render 'layerbegin' %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Questionname:</strong>
+  <%= @question.questionname %>
+</p>
+
+
+
+<p>
+  <strong>Questionimage:</strong>
+  <%= @question.questionimage %>
+</p>
+
+<p>
+  <strong>Voice:</strong>
+  <%= @question.voice %>
+</p>
+
+<p>
+  <strong>Driverlicensetype:</strong>
+  <%= @question.driverlicensetype %>
+</p>
+
+<p>
+  <strong>Questiontype:</strong>
+  <%= @question.questiontype %>
+</p>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>
+<%= render 'layerend' %>

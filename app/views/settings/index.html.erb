@@ -1,0 +1,91 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Settings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Autormerr</th>
+      <th>Showerrcount</th>
+      <th>Model</th>
+      <th>Password</th>
+      <th>Prescore</th>
+      <th>Driverschoolname</th>
+      <th>Contact</th>
+      <th>Addre</th>
+      <th>Introduction</th>
+      <th>Testbenchnumber</th>
+      <th>Driverschoolpicture</th>
+      <th>Province</th>
+      <th>Poweron</th>
+      <th>Closepassword</th>
+      <th>Shownotification</th>
+      <th>Softwaretitle</th>
+      <th>Hidedriverlicense</th>
+      <th>Hidesetting</th>
+      <th>Textreplace</th>
+      <th>Scrollingtext</th>
+      <th>Functionalmodule</th>
+      <th>Subjiectmodule</th>
+      <th>Learningmodule</th>
+      <th>Displaytest</th>
+      <th>Reshuffling</th>
+      <th>Autoclear</th>
+      <th>Subjectfourbutton</th>
+      <th>Registrationprocess</th>
+      <th>Paymentlink</th>
+      <th>Customerserviceqq</th>
+      <th>Customerserviceww</th>
+      <th>Comment</th>
+      <th>Registrationdisplay</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @settings.each do |setting| %>
+      <tr>
+        <td><%= setting.autormerr %></td>
+        <td><%= setting.showerrcount %></td>
+        <td><%= setting.model %></td>
+        <td><%= setting.password %></td>
+        <td><%= setting.prescore %></td>
+        <td><%= setting.driverschoolname %></td>
+        <td><%= setting.contact %></td>
+        <td><%= setting.addre %></td>
+        <td><%= setting.introduction %></td>
+        <td><%= setting.testbenchnumber %></td>
+        <td><%= setting.driverschoolpicture %></td>
+        <td><%= setting.province %></td>
+        <td><%= setting.poweron %></td>
+        <td><%= setting.closepassword %></td>
+        <td><%= setting.shownotification %></td>
+        <td><%= setting.softwaretitle %></td>
+        <td><%= setting.hidedriverlicense %></td>
+        <td><%= setting.hidesetting %></td>
+        <td><%= setting.textreplace %></td>
+        <td><%= setting.scrollingtext %></td>
+        <td><%= setting.functionalmodule %></td>
+        <td><%= setting.subjiectmodule %></td>
+        <td><%= setting.learningmodule %></td>
+        <td><%= setting.displaytest %></td>
+        <td><%= setting.reshuffling %></td>
+        <td><%= setting.autoclear %></td>
+        <td><%= setting.subjectfourbutton %></td>
+        <td><%= setting.registrationprocess %></td>
+        <td><%= setting.paymentlink %></td>
+        <td><%= setting.customerserviceQQ %></td>
+        <td><%= setting.customerserviceWW %></td>
+        <td><%= setting.comment %></td>
+        <td><%= setting.registrationdisplay %></td>
+        <td><%= link_to 'Show', setting %></td>
+        <td><%= link_to 'Edit', edit_setting_path(setting) %></td>
+        <td><%= link_to 'Destroy', setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Setting', new_setting_path %>

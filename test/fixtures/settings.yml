@@ -1,0 +1,71 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  autormerr: MyString
+  showerrcount: MyString
+  model: MyString
+  password: MyString
+  prescore: MyString
+  driverschoolname: MyString
+  contact: MyString
+  addre: MyString
+  introduction: MyString
+  testbenchnumber: 
+  driverschoolpicture: MyString
+  province: MyString
+  poweron: MyString
+  closepassword: MyString
+  shownotification: MyString
+  softwaretitle: MyString
+  hidedriverlicense: 
+  hidesetting: MyString
+  textreplace: MyString
+  scrollingtext: MyString
+  functionalmodule: MyString
+  subjiectmodule: MyString
+  learningmodule: MyString
+  displaytest: MyString
+  reshuffling: MyString
+  autoclear: MyString
+  subjectfourbutton: MyString
+  registrationprocess: MyString
+  paymentlink: MyString
+  customerserviceQQ: MyString
+  customerserviceWW: MyString
+  comment: MyString
+  registrationdisplay: MyString
+
+two:
+  autormerr: MyString
+  showerrcount: MyString
+  model: MyString
+  password: MyString
+  prescore: MyString
+  driverschoolname: MyString
+  contact: MyString
+  addre: MyString
+  introduction: MyString
+  testbenchnumber: 
+  driverschoolpicture: MyString
+  province: MyString
+  poweron: MyString
+  closepassword: MyString
+  shownotification: MyString
+  softwaretitle: MyString
+  hidedriverlicense: 
+  hidesetting: MyString
+  textreplace: MyString
+  scrollingtext: MyString
+  functionalmodule: MyString
+  subjiectmodule: MyString
+  learningmodule: MyString
+  displaytest: MyString
+  reshuffling: MyString
+  autoclear: MyString
+  subjectfourbutton: MyString
+  registrationprocess: MyString
+  paymentlink: MyString
+  customerserviceQQ: MyString
+  customerserviceWW: MyString
+  comment: MyString
+  registrationdisplay: MyString

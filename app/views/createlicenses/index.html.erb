@@ -1,0 +1,139 @@
+<%= render 'layerbegin' %>
+
+
+<script>
+  $(document).ready(function(){
+
+      $('#search').click(function(){
+          location.href="/createlicenses?cpuid="+$('#cpuid').val()+"&license="+$('#license').val();
+      });
+
+
+
+  });
+</script>
+
+
+<div class="col-lg-12">
+  <div class="ibox float-e-margins">
+    <div class="ibox-title">
+      <h3>序列号</h3>
+    </div>
+
+    <div class="ibox-content">
+
+      <div class="col-md-12">
+        <div class="col-md-2">
+        <input class="form-control"  placeholder="机器码" id="cpuid">
+        </div>
+        <div class="col-md-2">
+          <input class="form-control" placeholder="序列号" id="license">
+        </div>
+        <div class="col-md-2">
+          <input type="button" class="btn btn-success btn-sm" value="搜索" id="search">
+        </div>
+      </div>
+
+
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+        <tr>
+          <th class="text-center">机器码</th>
+          <th class="text-center">序列号</th>
+          <th class="text-center">生成时间</th>
+          <th class="text-center">类型</th>
+          <th class="text-center">次数/截止日期</th>
+          <th class="text-center">操作</th>
+
+        </tr>
+        </thead>
+
+
+
+        <tbody>
+        <% @cpuids.each do |cpuid| %>
+            <tr>
+
+              <% temrow=1 %>
+              <% @licenses.each do |f| %>
+              <% if f.cpuid_id == cpuid.id %>
+                  <% temrow=temrow+1 %>
+                  <% end %>
+              <% end %>
+
+
+
+
+              <td style="vertical-align: middle;" rowspan= <%= temrow %>   ><%= cpuid.cpuid %>&nbsp;&nbsp;&nbsp;&nbsp;
+                <%= link_to '', cpuid,class:'fa fa-trash', method: :delete, data: { confirm: 'Are you sure?' } %>
+              </td>
+
+              <% if temrow ==1 %>
+
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <% end %>
+
+
+
+
+            </tr>
+            <% @licenses.each do |license| %>
+                <% if license.cpuid_id == cpuid.id %>
+                    <tr>
+                      <td><%= license.license %></td>
+                      <td><%= license.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+                      <td>
+                        <% if license.licensetype==1 %>
+                        截止时间
+                            <% else %>
+                        次数
+                        <% end %>
+                      </td>
+                      <td>
+                        <% if license.licensetype==1 %>
+                        <%= license.licensetime %>
+                            <% else %>
+                            <%= license.licensenum %>
+                        <% end %>
+                      </td>
+<td>
+  <%= link_to '', license,class:'fa fa-trash', method: :delete, data: { confirm: 'Are you sure?' } %>
+</td>
+                    </tr>
+                <% end %>
+            <% end %>
+
+
+
+
+        <% end %>
+
+
+        </tbody>
+      </table>
+      <div class="text-center">
+
+        <%= will_paginate @cpuids, previous_label:'上一页', next_label: '下一页' %>
+
+      </div>
+      <div class="text-center">
+        机器码：<%= @cpucount %>&nbsp;&nbsp;序列号：<%= @licensecount %>
+      </div>
+      <%= link_to "生成", createlicense_path('createlicense'),class: "btn btn-w-m btn-success mylink pull-right" ,'data-no-turbolink'=>true%>
+
+
+      <br>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+<%= render 'layerend' %>

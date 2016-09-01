@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Errquests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Amount</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @errquests.each do |errquest| %>
+      <tr>
+        <td><%= errquest.amount %></td>
+        <td><%= link_to 'Show', errquest %></td>
+        <td><%= link_to 'Edit', edit_errquest_path(errquest) %></td>
+        <td><%= link_to 'Destroy', errquest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Errquest', new_errquest_path %>

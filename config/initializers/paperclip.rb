@@ -1,0 +1,1 @@
+Paperclip.options[:content_type_mappings] = {mp3: %w( application/octet-stream)}

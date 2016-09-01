@@ -1,0 +1,149 @@
+<%= form_for(@setting) do |f| %>
+  <% if @setting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@setting.errors.count, "error") %> prohibited this setting from being saved:</h2>
+
+      <ul>
+      <% @setting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :autormerr %><br>
+    <%= f.text_field :autormerr %>
+  </div>
+  <div class="field">
+    <%= f.label :showerrcount %><br>
+    <%= f.text_field :showerrcount %>
+  </div>
+  <div class="field">
+    <%= f.label :model %><br>
+    <%= f.text_field :model %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.text_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :prescore %><br>
+    <%= f.text_field :prescore %>
+  </div>
+  <div class="field">
+    <%= f.label :driverschoolname %><br>
+    <%= f.text_field :driverschoolname %>
+  </div>
+  <div class="field">
+    <%= f.label :contact %><br>
+    <%= f.text_field :contact %>
+  </div>
+  <div class="field">
+    <%= f.label :addre %><br>
+    <%= f.text_field :addre %>
+  </div>
+  <div class="field">
+    <%= f.label :introduction %><br>
+    <%= f.text_field :introduction %>
+  </div>
+  <div class="field">
+    <%= f.label :testbenchnumber %><br>
+    <%= f.text_field :testbenchnumber %>
+  </div>
+  <div class="field">
+    <%= f.label :driverschoolpicture %><br>
+    <%= f.text_field :driverschoolpicture %>
+  </div>
+  <div class="field">
+    <%= f.label :province %><br>
+    <%= f.text_field :province %>
+  </div>
+  <div class="field">
+    <%= f.label :poweron %><br>
+    <%= f.text_field :poweron %>
+  </div>
+  <div class="field">
+    <%= f.label :closepassword %><br>
+    <%= f.text_field :closepassword %>
+  </div>
+  <div class="field">
+    <%= f.label :shownotification %><br>
+    <%= f.text_field :shownotification %>
+  </div>
+  <div class="field">
+    <%= f.label :softwaretitle %><br>
+    <%= f.text_field :softwaretitle %>
+  </div>
+  <div class="field">
+    <%= f.label :hidedriverlicense %><br>
+    <%= f.text_field :hidedriverlicense %>
+  </div>
+  <div class="field">
+    <%= f.label :hidesetting %><br>
+    <%= f.text_field :hidesetting %>
+  </div>
+  <div class="field">
+    <%= f.label :textreplace %><br>
+    <%= f.text_field :textreplace %>
+  </div>
+  <div class="field">
+    <%= f.label :scrollingtext %><br>
+    <%= f.text_field :scrollingtext %>
+  </div>
+  <div class="field">
+    <%= f.label :functionalmodule %><br>
+    <%= f.text_field :functionalmodule %>
+  </div>
+  <div class="field">
+    <%= f.label :subjiectmodule %><br>
+    <%= f.text_field :subjiectmodule %>
+  </div>
+  <div class="field">
+    <%= f.label :learningmodule %><br>
+    <%= f.text_field :learningmodule %>
+  </div>
+  <div class="field">
+    <%= f.label :displaytest %><br>
+    <%= f.text_field :displaytest %>
+  </div>
+  <div class="field">
+    <%= f.label :reshuffling %><br>
+    <%= f.text_field :reshuffling %>
+  </div>
+  <div class="field">
+    <%= f.label :autoclear %><br>
+    <%= f.text_field :autoclear %>
+  </div>
+  <div class="field">
+    <%= f.label :subjectfourbutton %><br>
+    <%= f.text_field :subjectfourbutton %>
+  </div>
+  <div class="field">
+    <%= f.label :registrationprocess %><br>
+    <%= f.text_field :registrationprocess %>
+  </div>
+  <div class="field">
+    <%= f.label :paymentlink %><br>
+    <%= f.text_field :paymentlink %>
+  </div>
+  <div class="field">
+    <%= f.label :customerserviceQQ %><br>
+    <%= f.text_field :customerserviceQQ %>
+  </div>
+  <div class="field">
+    <%= f.label :customerserviceWW %><br>
+    <%= f.text_field :customerserviceWW %>
+  </div>
+  <div class="field">
+    <%= f.label :comment %><br>
+    <%= f.text_field :comment %>
+  </div>
+  <div class="field">
+    <%= f.label :registrationdisplay %><br>
+    <%= f.text_field :registrationdisplay %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
