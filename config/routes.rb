@@ -4,7 +4,11 @@ Rails.application.routes.draw do
      get 'chkrpt'
     end
   end
-  resources :users
+  resources :users do
+    collection do
+     get 'createuser'
+    end
+  end
   resources :subjects
   resources :settings
   resources :scores
@@ -27,6 +31,8 @@ Rails.application.routes.draw do
       get 'updatecheck'
       get 'chapter'
       get 'subject'
+      get 'getvalidate'
+      get 'getuser'
     end
   end
   resources :createlicenses do

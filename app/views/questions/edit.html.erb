@@ -704,8 +704,6 @@ $('#img1').attr('src',$('#questionimageurl').val());
             <%=num %>.&nbsp;<%= answer.asnwer %>&nbsp;
             <%= link_to '', [answer.question,answer],class:'fa fa fa-close', method: :delete, data: { confirm: 'Are you sure?' } %>&nbsp; &nbsp;
 
-
-
             <% if answer.isright == 1 %>
                 <input type="checkbox" id=<%= 'A'+answer.id.to_s %> class="answer" checked=""> <i></i> 正确<br>
             <% else %>

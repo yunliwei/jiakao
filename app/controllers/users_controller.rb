@@ -29,8 +29,69 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
+    @lastuser='user000'
+    @myuser =User.last
+    if @myuser != nil
+      @lastuser=@myuser.login.to_s
+    end
+
+
+  @lastuser=createlogin(@lastuser,1)
+
   end
+
+
+  def createuser
+
+    num=0
+    num=params[:num].to_i
+    login = params[:startlogin].to_s
+mypwdnum=params[:pwdnum]
+    mytype=params[:type]
+    typevalue=params[:typevalue]
+
+    step=0
+    createsum=0
+
+    loop do
+      locallogin=createlogin(login,step)
+
+      temuser=User.find_by_login(locallogin)
+      if(temuser)
+        step=step+1
+      else
+
+        mypwd = randpassword(mypwdnum)
+if mytype=='0'
+        User.create(login:locallogin,password:mypwd,logintype:mytype,loginnumber:typevalue,status:'1')
+else
+  User.create(login:locallogin,password:mypwd,logintype:mytype,logintime:typevalue,status:'1')
+
+        end
+
+
+        step=step+1
+        createsum=createsum + 1
+      end
+      if(createsum>=num)
+        break
+      end
+
+
+
+    end
+
+    redirect_to users_path
+
+
+
+
+  end
+
+
+
+
+
 
   # GET /users/1/edit
   def edit
@@ -86,4 +147,53 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:login, :password, :head, :studentid, :sex, :age, :idcard, :name, :money, :model, :Subject, :logintype, :loginnumber, :logintime, :status)
     end
+
+
+  def createlogin (login,addvalue)
+
+
+    userlength=login.length.to_i-1
+
+
+
+    login.length.times do |f|
+      if login[userlength].to_s.include?('0') || login[userlength].to_s.include?('1') || login[userlength].to_s.include?('2') || login[userlength].to_s.include?('3') || login[userlength].to_s.include?('4') || login[userlength].to_s.include?('5') || login[userlength].to_s.include?('6') || login[userlength].to_s.include?('7') || login[userlength].to_s.include?('8') || login[userlength].to_s.include?('9')
+        userlength=userlength-1
+      else
+        break
+      end
+    end
+
+
+    usera = login[0,userlength+1]
+    userb=login[userlength+1,login.length].to_i
+    userb=userb+addvalue
+
+    loop do
+      temuser=usera.to_s+userb.to_s
+      if temuser.length<login.length
+        usera=usera+'0'
+      else
+        break
+      end
+    end
+
+
+    login=usera.to_s+userb.to_s
+
+
+  end
+
+
+
+  def randpassword(passwordnum)
+    mypwd=''
+    passwordnum.to_i.times do
+      mypwd=mypwd+rand(9).to_s
+    end
+    return mypwd
+
+  end
+
+
 end
