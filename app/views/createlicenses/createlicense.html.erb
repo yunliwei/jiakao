@@ -1,7 +1,7 @@
 <%= render 'layerbegin' %>
 <script>
   $(document).ready(function () {
-
+      var xingcheck;
 $('#create').click(function(){
    var cpuid=$('#cpuid').val();
     var licensetype=$('#licensetype').val();
@@ -33,7 +33,54 @@ alert('err');
       });
 
 
+      xingcheck='';
+      $('.xing:checked').each(function(){
 
+
+          xingcheck+=$(this).val()+":";
+
+      });
+      if(xingcheck.length>0)
+      {
+          xingcheck=tixingcheck.substring(0,xingcheck.length-1);
+      }
+      //alert(ischeck);
+      //return false;
+      $('#licensetype').val(xingcheck);
+
+
+      var typecheck = $('#licensetype').val().split(':');
+      //alert(mycheck);
+
+      $.each( typecheck, function(i, n){
+          if(n=='CS') {
+              $('#CS').iCheck('check');
+          }
+          if(n=='JZ') {
+              $('#JZ').iCheck('check');
+          }
+
+
+      });
+
+      $('#CS').on('ifChecked',function(event){
+          $('#JZ').iCheck('uncheck');
+          $('#csdiv').removeClass('hiddenerr');
+          $('#csdiv').addClass('showerr');
+          $('#jzdiv').removeClass('showerr');
+          $('#jzdiv').addClass('hiddenerr');
+          $('#CS').iCheck('uncheck');
+          $('#CS').iCheck('uncheck');
+
+      });
+      $('#JZ').on('ifChecked',function(event){
+          $('#CS').iCheck('uncheck');
+
+          $('#jzdiv').removeClass('hiddenerr');
+          $('#jzdiv').addClass('showerr');
+          $('#csdiv').removeClass('showerr');
+          $('#csdiv').addClass('hiddenerr');
+      });
 
 
 
@@ -72,16 +119,13 @@ alert('err');
           <td>
             <div class="icheckbox i-checks">
               <label>
-                <input type="checkbox" id="JZ" value="SJ" class="xing"> <i></i>截止日期 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="checkbox" id="JZ" value="JZ" class="xing"> <i></i>截止日期 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
           </td>
             </table>
       </div>
     </div>
   </div>
-
-
-
 
   <div class="form-group">
     <label class="col-sm-2 control-label">次数：</label>

@@ -27,3 +27,4 @@
 //= require plugins/metisMenu/jquery.metisMenu.js
 //= require plugins/slimscroll/jquery.slimscroll.min.js
 //= require plugins/datapicker/bootstrap-datepicker.js
+//= require plugins/iCheck/icheck.min.js
