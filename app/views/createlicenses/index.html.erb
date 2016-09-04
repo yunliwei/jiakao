@@ -51,7 +51,6 @@
         <tbody>
         <% @cpuids.each do |cpuid| %>
             <tr>
-
               <% temrow=1 %>
               <% @licenses.each do |f| %>
               <% if f.cpuid_id == cpuid.id %>
@@ -59,26 +58,20 @@
                   <% end %>
               <% end %>
 
-
-
-
               <td style="vertical-align: middle;" rowspan= <%= temrow %>   ><%= cpuid.cpuid %>&nbsp;&nbsp;&nbsp;&nbsp;
                 <%= link_to '', cpuid,class:'fa fa-trash', method: :delete, data: { confirm: 'Are you sure?' } %>
               </td>
 
               <% if temrow ==1 %>
-
                   <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
                   <% end %>
-
-
-
-
             </tr>
+
+
             <% @licenses.each do |license| %>
                 <% if license.cpuid_id == cpuid.id %>
                     <tr>
