@@ -15,6 +15,7 @@
           <th class="text-center">密码</th>
           <th class="text-center">类型</th>
           <th class="text-center">次数/截止日期</th>
+          <th class="text-center">权限</th>
           <th class="text-center">操作</th>
         </tr>
         </thead>
@@ -22,8 +23,14 @@
         <% @users.each do |user| %>
             <tr>
               <td><%= user.login%></td>
-              <td><%= user.password%></td>
+              <td></td>
 
+              <td><%= user.logintype%></td>
+              <td></td>
+              <td><%= user.status%></td>
+              <td>
+                <%= link_to '', edit_user_path(user),class:'fa fa-edit' %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <%= link_to '', user,class:'fa fa-trash', method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
         <% end %>
 
@@ -38,32 +45,18 @@
 
 
   <tbody>
-  <% @users.each do |user| %>
-      <tr>
-        <td><%= user.login %></td>
-        <td><%= user.password %></td>
-        <td><%= user.head %></td>
-        <td><%= user.studentid %></td>
-        <td><%= user.sex %></td>
-        <td><%= user.age %></td>
-        <td><%= user.idcard %></td>
-        <td><%= user.name %></td>
-        <td><%= user.money %></td>
-        <td><%= user.model %></td>
-        <td><%= user.Subject %></td>
-        <td><%= user.logintype %></td>
-        <td><%= user.loginnumber %></td>
-        <td><%= user.logintime %></td>
-        <td><%= user.status %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-  <% end %>
+
+
+
   </tbody>
 </table>
 <br>
-<%= link_to 'New User', new_user_path %>
+<div class="text-center">
+
+  <%= will_paginate @users, previous_label:'上一页', next_label: '下一页' %>
+
+</div>
+<%= link_to "新建用户", new_user_path('user'),class: "btn btn-w-m btn-success mylink pull-right" ,'data-no-turbolink'=>true%>
 
 
 <br>

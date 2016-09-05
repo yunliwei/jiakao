@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.all.order("updated_at DESC").paginate(page:params[:page],per_page:10)
     #require 'md5'
     @mycpu=::Digest::MD5.hexdigest('BFEBBFFF000306C4:20161201:1:CLOUDTIMESOFT')#bfebfbff000306c3
 

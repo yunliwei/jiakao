@@ -1,77 +1,183 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= render 'layerbegin' %>
+
+<script>
+    $(document).ready(function(){
+
+        $('#create').click(function(){
+
+            var typevalue;
+            if($('#typevalue').val()==0)
+            {
+                typevalue=$('#typenum').val();
+            }else
+            {
+                typevalue=$('#typetime').val();
+            }
+
+
+
+            location.href='/users/createuser?num='+$('#num').val()+'&startlogin='+$('#startlogin').val()+'&pwdnum='+$('#passnum').val()+'&type='+$('#typevalue').val()+'&typevalue='+typevalue;
+
+
+        });
+
+
+
+
+
+
+
+
+
+        $('#selecttype').change(function(){
+
+            $('#typevalue').val($(this).val());
+
+            if($(this).val()==0)
+            {
+                $('#cishu').addClass('showerr');
+                $('#cishu').removeClass('hiddenerr');
+                $('#data_1').addClass('hiddenerr');
+                $('#data_1').removeClass('showerr');
+            }else
+            {
+                $('#data_1').addClass('showerr');
+                $('#data_1').removeClass('hiddenerr');
+                $('#cishu').addClass('hiddenerr');
+                $('#cishu').removeClass('showerr');
+            }
+
+        });
+
+
+
+        $('#data_1 .input-group.date').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
+
+    });
+
+
+
+
+
+</script>
+
+
+<style type="text/css">
+    .showerr{
+        display: block;
+    }
+    .hiddenerr{
+        display: none;
+    }
+</style>
+
+
+<div class="ibox-content form-horizontal m-t">
+  <h3>生成用户</h3>
+
+
+
+  <br>
+  <br>
+
+  <div class="form-group">
+    <label class="col-sm-5 control-label">帐号生成数量：</label>
+    <div class="col-sm-3">
+      <input class="form-control" id="num">
+
     </div>
-  <% end %>
+  </div>
 
-  <div class="field">
-    <%= f.label :login %><br>
-    <%= f.text_field :login %>
+
+  <div class="form-group">
+    <label class="col-sm-5 control-label">帐号：</label>
+    <div class="col-sm-3">
+      <input class="form-control" value=<%= @lastuser %>    id="startlogin" >
+
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.text_field :password %>
+
+  <div class="form-group">
+    <label class="col-sm-5 control-label">密码位数：</label>
+    <div class="col-sm-3">
+      <input class="form-control" value="6"   id="passnum" >
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :head %><br>
-    <%= f.text_field :head %>
+
+
+  <div class="form-group">
+    <label class="col-sm-5 control-label">类型：</label>
+
+    <div class="col-sm-3">
+      <select class="form-control m-b" id="selecttype">
+        <option value="0">次数</option>
+        <option  value="1">时间</option>
+      </select>
+
+
+      <input hidden="hidden",id="typevalue" value="0">
+
+      <div class="hiddenerr"><span style="color: red;">请选择类型</span></div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :studentid %><br>
-    <%= f.text_field :studentid %>
+
+  <div class="form-group showerr" id="cishu">
+    <label class="col-sm-5 control-label">次数：</label>
+    <div class="col-sm-3">
+      <input class="form-control" id="typenum">
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :sex %><br>
-    <%= f.text_field :sex %>
+
+  <div class="form-group hiddenerr" id="data_1">
+    <label class="col-sm-5 control-label">截止日期：</label>
+    <div class="col-sm-3">
+      <div class="input-group date">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        <input type="text" class="form-control" id="typetime">
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :age %><br>
-    <%= f.number_field :age %>
+
+  <div class="form-group">
+    <label class="col-sm-5 control-label">权限：</label>
+    <div class="col-sm-3">
+      <select class="form-control m-b" id="statutype">
+        <option value="0">停用</option>
+        <option  value="1">正常使用</option>
+      </select>
+      <input hidden="hidden",id="statuvalue" value="0">
+
+      <div class="hiddenerr"><span style="color: red;">设置权限</span></div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :idcard %><br>
-    <%= f.number_field :idcard %>
+
+
+
+  <div>
+    <input type="button" value="生成" id="create" class="btn btn-w-m btn-success mylink pull-right">
   </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+
+
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label"></label>
+    <div class="col-sm-9">
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :money %><br>
-    <%= f.text_field :money %>
-  </div>
-  <div class="field">
-    <%= f.label :model %><br>
-    <%= f.text_field :model %>
-  </div>
-  <div class="field">
-    <%= f.label :Subject %><br>
-    <%= f.text_field :Subject %>
-  </div>
-  <div class="field">
-    <%= f.label :logintype %><br>
-    <%= f.text_field :logintype %>
-  </div>
-  <div class="field">
-    <%= f.label :loginnumber %><br>
-    <%= f.number_field :loginnumber %>
-  </div>
-  <div class="field">
-    <%= f.label :logintime %><br>
-    <%= f.text_field :logintime %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.text_field :status %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+
+
+
+
+
+
+</div>
+
+
+<%= render 'layerend' %>

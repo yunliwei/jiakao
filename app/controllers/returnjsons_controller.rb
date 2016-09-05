@@ -32,7 +32,11 @@ class ReturnjsonsController < ApplicationController
     if myuser
       myuser.remoteval=myuuid
       myuser.save
-      render json:('[{"validate":"'+myuuid+'"}]')
+      if myuser.logintype=='0'
+      render json:('[{"validate":"'+myuuid+'","value":"'+myuser.loginnumber.to_s+'","status":"'+myuser.status+'"}]')
+      else
+        render json:('[{"validate":"'+myuuid+'","value":"'+myuser.logintime.to_s+'","status":"'+myuser.status+'"}]')
+        end
     end
   end
 
@@ -41,8 +45,9 @@ class ReturnjsonsController < ApplicationController
     validate=params[:validate]
 login = 'add86'
     myuser=User.find_by_login(login)
-    myvalidate=::Digest::MD5.hexdigest(myuser.login+myuser.passowrd+myuser.remoteval+'CLOUDTIMESOFT')
-    #if myvalidate == validate && Time.parse(myvalidate.updated_at)
+    myvalidate=::Digest::MD5.hexdigest(myuser.login+myuser.password+myuser.remoteval+'CLOUDTIMESOFT')
+
+    myvalidate.to_s.upcase!    #if myvalidate == validate && Time.parse(myvalidate.updated_at)
     usertime= myuser.updated_at
     nowtime=Time.now
     if nowtime - DateTime.parse(usertime.to_s) < 60 && validate==myvalidate
