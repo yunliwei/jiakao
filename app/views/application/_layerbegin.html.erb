@@ -5,6 +5,19 @@
         <li class="nav-header">
           <div class="dropdown profile-element"> <span>
                              </span>
+            <a data-toggle="dropdown" class="dropdown-toggle">
+                                <span class="clear">
+                                  <span class="block m-t-xs">
+                                    <strong class="font-bold"><%= session[:username] %></strong>
+                                   </span>
+                                  <span>当前管理员 </span>
+                                </span>
+            </a>
+
+
+
+
+
 
             <ul class="dropdown-menu animated fadeInRight m-t-xs">
 
@@ -12,7 +25,7 @@
 
 
               <li class="divider"></li>
-              <li><%= link_to '退出', logins_path %>安全退出
+              <li><%= link_to '退出', logins_path %>
               </li>
             </ul>
           </div>
@@ -51,6 +64,14 @@
           <ul class="nav nav-second-level">
             <li>
               <%= link_to '用户',users_path %>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href=""><i class="fa fa-user"></i> <span class="nav-label">用户记录</span><span class="fa arrow"></span> </a>
+          <ul class="nav nav-second-level">
+            <li>
+              <%= link_to '用户记录',loginlogs_path %>
             </li>
           </ul>
         </li>

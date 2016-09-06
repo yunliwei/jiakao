@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160902074745) do
+ActiveRecord::Schema.define(version: 20160906052619) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "adminname",       limit: 255
@@ -59,6 +59,13 @@ ActiveRecord::Schema.define(version: 20160902074745) do
     t.integer  "licensenum",  limit: 4
     t.string   "licensetime", limit: 255
     t.integer  "licensetype", limit: 4
+  end
+
+  create_table "loginlogs", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.string   "ip",         limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "progres", force: :cascade do |t|

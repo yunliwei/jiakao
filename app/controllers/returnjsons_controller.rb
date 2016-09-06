@@ -50,13 +50,14 @@ login = 'add86'
     myvalidate.to_s.upcase!    #if myvalidate == validate && Time.parse(myvalidate.updated_at)
     usertime= myuser.updated_at
     nowtime=Time.now
-    if nowtime - DateTime.parse(usertime.to_s) < 60 && validate==myvalidate
+    if nowtime - DateTime.parse(usertime.to_s) < 10 && validate==myvalidate
     render json:(myuser)
     else
       render json:('[{"status":"error"}]')
       end
 
   end
+
 
 
 end

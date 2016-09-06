@@ -13,4 +13,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
+  def check_login
+    if session[:login] == nil || session == ''
+      redirect_to logins_path
+    end
+  end
+
 end

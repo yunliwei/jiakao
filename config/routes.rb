@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   end
 resources :cpuids
   resources :licenses
+  resources :loginlogs
 
 
   # The priority is based upon order of creation: first created -> highest priority.

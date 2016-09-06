@@ -1,0 +1,2 @@
+module LoginlogsHelper
+end
