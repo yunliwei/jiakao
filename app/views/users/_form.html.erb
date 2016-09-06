@@ -60,6 +60,8 @@
             autoclose: true
         });
 
+
+
     });
 
 
@@ -80,88 +82,56 @@
 
 
 <div class="ibox-content form-horizontal m-t">
-  <h3>生成用户</h3>
+  <h3>编辑用户</h3>
 
-
-
-  <br>
-  <br>
 
   <div class="form-group">
-    <label class="col-sm-5 control-label">帐号生成数量：</label>
-    <div class="col-sm-3">
-      <input class="form-control" id="num">
-
-    </div>
+    <%= form_for(@user,:html => {:class=>'form-horizontal m-t',:multipart => true}) do |f| %>
   </div>
-
 
   <div class="form-group">
     <label class="col-sm-5 control-label">帐号：</label>
     <div class="col-sm-3">
-      <input class="form-control" value=<%= @lastuser %>    id="startlogin" >
-
+      <%= f.text_field  :login  ,onfocus:"this.blur()"%>
     </div>
   </div>
 
+
   <div class="form-group">
-    <label class="col-sm-5 control-label">密码位数：</label>
+    <label class="col-sm-5 control-label">密码：</label>
     <div class="col-sm-3">
-      <input class="form-control" value="6"   id="passnum" >
+      <%= f.text_field :password %>
     </div>
   </div>
 
 
   <div class="form-group">
     <label class="col-sm-5 control-label">类型：</label>
-
     <div class="col-sm-3">
-      <select class="form-control m-b" id="selecttype">
-        <option value="0">次数</option>
-        <option  value="1">时间</option>
-      </select>
-
-
-      <input hidden="hidden",id="typevalue" value="0">
-
-      <div class="hiddenerr"><span style="color: red;">请选择类型</span></div>
+      <%= f.text_field  :logintype ,onclick:"alert(this.value);"%><p>(1为记时方式，0为记次方式）</p>
     </div>
   </div>
 
-  <div class="form-group showerr" id="cishu">
-    <label class="col-sm-5 control-label">次数：</label>
-    <div class="col-sm-3">
-      <input class="form-control" id="typenum">
+  <div class="form-group" >
+    <label class="col-sm-5 control-label">次数/截止日期：</label>
+    <div class="col-sm-3" id="cishu">
+      <%= f.text_field  :loginnumber%>
+      <%=f.text_field :logintime %>
     </div>
   </div>
 
-  <div class="form-group hiddenerr" id="data_1">
-    <label class="col-sm-5 control-label">截止日期：</label>
-    <div class="col-sm-3">
-      <div class="input-group date">
-        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-        <input type="text" class="form-control" id="typetime">
-      </div>
-    </div>
-  </div>
+
 
   <div class="form-group">
     <label class="col-sm-5 control-label">权限：</label>
     <div class="col-sm-3">
-      <select class="form-control m-b" id="statutype">
-        <option value="0">停用</option>
-        <option  value="1">正常使用</option>
-      </select>
-      <input hidden="hidden",id="statuvalue" value="0">
-
-      <div class="hiddenerr"><span style="color: red;">设置权限</span></div>
+      <%= f.text_field  :status %><p>（1为正常使用，0为停用）</p>
     </div>
   </div>
 
 
-
   <div>
-    <input type="button" value="生成" id="create" class="btn btn-w-m btn-success mylink pull-right">
+    <input type="button" value="确定" id="create" class="btn btn-w-m btn-success mylink pull-right">
   </div>
 
 
@@ -172,12 +142,7 @@
     </div>
   </div>
 
-
-
-
-
-
+<% end %>
 </div>
-
 
 <%= render 'layerend' %>

@@ -137,6 +137,19 @@ location.href='/users/createuser?num='+$('#num').val()+'&startlogin='+$('#startl
   </div>
 
 
+  <div class="form-group">
+    <label class="col-sm-5 control-label">权限：</label>
+    <div class="col-sm-3">
+      <select class="form-control m-b" id="statutype">
+        <option value="0">停用</option>
+        <option  value="1">正常使用</option>
+      </select>
+      <input hidden="hidden",id="statuvalue" value="1">
+
+      <div class="hiddenerr"><span style="color: red;">设置权限</span></div>
+    </div>
+  </div>
+
   <div>
     <input type="button" value="生成" id="create" class="btn btn-w-m btn-success mylink pull-right">
   </div>

@@ -23,10 +23,10 @@
         <% @users.each do |user| %>
             <tr>
               <td><%= user.login%></td>
-              <td></td>
+              <td><%= user.password %></td>
 
               <td><%= user.logintype%></td>
-              <td></td>
+              <td><%= user.loginnumber %><%= user.logintime %></td>
               <td><%= user.status%></td>
               <td>
                 <%= link_to '', edit_user_path(user),class:'fa fa-edit' %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
