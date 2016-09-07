@@ -2,22 +2,57 @@
 <%= render 'layerbegin' %>
 
 <script>
-    $(document).ready(function(){
+
+        $(document).ready(function(){
+
+            $('#create').click(function(){
+
+                var typevalue;
+                if($('#typevalue').val()==0)
+                {
+                    typevalue=$('#typenum').val();
+                }else
+                {
+                    typevalue=$('#typetime').val();
+                }
+
+                location.href='/users/createuser?num='+$('#num').val()+'&startlogin='+$('#startlogin').val()+'&pwdnum='+$('#passnum').val()+'&type='+$('#typevalue').val()+'&typevalue='+typevalue;
+
+
+            });
+
+
+            $('#selecttype').change(function(){
+
+                $('#typevalue').val($(this).val());
+
+                if($(this).val()==0)
+                {
+                    $('#cishu').addClass('showerr');
+                    $('#cishu').removeClass('hiddenerr');
+                    $('#data_1').addClass('hiddenerr');
+                    $('#data_1').removeClass('showerr');
+                }else
+                {
+                    $('#data_1').addClass('showerr');
+                    $('#data_1').removeClass('hiddenerr');
+                    $('#cishu').addClass('hiddenerr');
+                    $('#cishu').removeClass('showerr');
+                }
+
+            });
 
 
 
+            $('#data_1 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
 
-
-
-
-
-
-
-    });
-
-
-
-
+        });
 
 </script>
 
@@ -36,7 +71,7 @@
   <div class="form-group">
     <label class="col-sm-5 control-label">帐号：</label>
     <div class="col-sm-3">
-      <%= f.text_field  :login  ,onfocus:"this.blur()"%>
+      <%= f.text_field  :login ,class:"form-control" ,onfocus:"this.blur()"%>
     </div>
   </div>
 
@@ -44,43 +79,57 @@
   <div class="form-group">
     <label class="col-sm-5 control-label">密码：</label>
     <div class="col-sm-3">
-      <%= f.text_field :password %>
+      <%= f.text_field :password,class:"form-control" %>
     </div>
   </div>
 
+        <div class="form-group">
+          <label class="col-sm-5 control-label">类型：</label>
 
-  <div class="form-group">
-    <label class="col-sm-5 control-label">类型：</label>
-    <div class="col-sm-3">
-      <%= f.text_field  :logintype%>(1为记时方式，0为记次方式）
-    </div>
-  </div>
+          <div class="col-sm-3">
+            <select class="form-control m-b" id="selecttype">
+              <option value="0">次数</option>
+              <option  value="1">时间</option>
+            </select>
 
-  <div class="form-group" >
-    <label class="col-sm-5 control-label">次数/截止日期：</label>
-    <div class="col-sm-3" id="cishu">
-     <%=f.text_field  :loginnumber%>
-      <%=f.text_field :logintime %>
+            <input hidden="hidden",id="typevalue" value="0">
 
-    </div>
-  </div>
+            <div class="hiddenerr"><span style="color: red;">请选择类型</span></div>
+          </div>
+        </div>
+
+        <div class="form-group showerr" id="cishu">
+          <label class="col-sm-5 control-label">次数：</label>
+          <div class="col-sm-3">
+            <input class="form-control" id="typenum">
+          </div>
+        </div>
+
+        <div class="form-group hiddenerr" id="data_1">
+          <label class="col-sm-5 control-label">截止日期：</label>
+          <div class="col-sm-3">
+            <div class="input-group date">
+              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              <input type="text" class="form-control" id="typetime">
+            </div>
+          </div>
+        </div>
 
 
-
-  <div class="form-group">
-    <label class="col-sm-5 control-label">权限：</label>
-    <div class="col-sm-3">
-      <%= f.text_field  :status %>（1为正常使用，0为停用)
-    </div>
-  </div>
-
-
+        <div class="form-group">
+          <label class="col-sm-5 control-label">权限：</label>
+          <div class="col-sm-3">
+            <select class="form-control m-b" id="statutype">
+              <option value="0">停用</option>
+              <option  value="1">正常使用</option>
+            </select>
+            <input hidden="hidden",id="statuvalue" value="1">
+          （1为正常使用，0为停用)
+          </div>
+        </div>
   <div>
     <%= f.submit'确定',class: "btn btn-w-m btn-success mylink pull-right",'data-no-turbolink'=>true %>
   </div>
-
-
-
   <div class="form-group">
     <label class="col-sm-2 control-label"></label>
     <div class="col-sm-9">

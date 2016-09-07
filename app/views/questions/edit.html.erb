@@ -721,7 +721,6 @@ $('#img1').attr('src',$('#questionimageurl').val());
     </div>
     <div>
       <% if num <5 %>
-
           <%= form_for([@question, @question.answers.build]) do |f| %>
               <div class="form-group">
                 <div class="col-sm-4">
