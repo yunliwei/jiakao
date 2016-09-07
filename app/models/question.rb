@@ -22,21 +22,21 @@ class Question < ActiveRecord::Base
 
   private
   def randomize_questionimage
-    if questionimage_file_name != nil
     #archives 就是你在 has_attached_file :archives 使用的名字
-    extension = File.extname(questionimage_file_name).downcase
-    #你可以改成你想要的文件名，把下面这个方法的第二个参数随便改了就可以了。
-    self.questionimage.instance_write(:file_name, "#{UUIDTools::UUID.timestamp_create}#{rand(1000)}#{extension}")
-      end
+    if questionimage_file_name != nil
+      extension = File.extname(questionimage_file_name).downcase
+      #你可以改成你想要的文件名，把下面这个方法的第二个参数随便改了就可以了。
+      self.questionimage.instance_write(:file_name, "#{questionimage.instance.id}#{extension}")
+    end
   end
 
   def randomize_voice
     if voice_file_name != nil
-    #archives 就是你在 has_attached_file :archives 使用的名字
-    extension = File.extname(voice_file_name).downcase
-    #你可以改成你想要的文件名，把下面这个方法的第二个参数随便改了就可以了。
-    self.voice.instance_write(:file_name, "#{UUIDTools::UUID.timestamp_create}#{rand(1000)}#{extension}")
-      end
+      #archives 就是你在 has_attached_file :archives 使用的名字
+      extension = File.extname(voice_file_name).downcase
+      #你可以改成你想要的文件名，把下面这个方法的第二个参数随便改了就可以了。
+      self.voice.instance_write(:file_name, "#{voice.instance.id}#{extension}")
+    end
   end
 
 

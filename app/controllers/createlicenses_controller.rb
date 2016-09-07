@@ -6,6 +6,7 @@ class CreatelicensesController < ApplicationController
     @licenses=License.all
     if params[:cpuid]!='' && params[:cpuid]!= nil
       @cpuids=Cpuid.where("cpuid like '%"+params[:cpuid]+"%'")
+
     end
 
 
@@ -16,6 +17,7 @@ class CreatelicensesController < ApplicationController
       @licenses.each do |f|
       cpu_ids=cpu_ids+f.cpuid_id.to_s+','
       end
+
       if cpu_ids.length>0
         cpu_ids=cpu_ids[0,cpu_ids.length-1]
         @cpuids=Cpuid.where('id in ('+cpu_ids+')')
