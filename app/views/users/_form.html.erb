@@ -57,6 +57,14 @@
 </script>
 
 
+<style type="text/css">
+    .showerr{
+        display: block;
+    }
+    .hiddenerr{
+        display: none;
+    }
+</style>
 
 
 
@@ -94,7 +102,7 @@
 
             <input hidden="hidden",id="typevalue" value="0">
 
-            <div class="hiddenerr"><span style="color: red;">请选择类型</span></div>
+
           </div>
         </div>
 
@@ -137,6 +145,71 @@
   </div>
 
 <% end %>
-</div>
+
+
+
+
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h3>用户记录</h3>
+        </div>
+        <div class="ibox-content">
+          <table class="table table-hover table-bordered text-center">
+            <thead>
+            <tr>
+
+              <th class="text-center">IP地址</th>
+              <th class="text-center">登录地区</th>
+              <th class="text-center">登录时间</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+
+            <% @loginlogs.each do |loginlog| %>
+                <tr>
+                <td>
+                    <%= loginlog.ip %>
+                  </td>
+
+                  <td>
+                    <%= loginlog.location %>
+                  </td>
+                  <td>
+                    <%= loginlog.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+                  </td>
+
+
+            <% end %>
+
+
+
+
+
+
+</tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+<br>
+
+
+
+
+<br>
 
 <%= render 'layerend' %>

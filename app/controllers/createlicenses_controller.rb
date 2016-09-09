@@ -25,7 +25,8 @@ class CreatelicensesController < ApplicationController
         @cpuids=Cpuid.where(id:0)
       end
     end
-@cpuids= @cpuids.paginate(page:params[:page],per_page:10)
+@cpuids= @cpuids.order("updated_at DESC").paginate(page:params[:page],per_page:10)
+
    # @licenses=License.all.order("updated_at DESC")
 
     @cpucount=@cpuids.count

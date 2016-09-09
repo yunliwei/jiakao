@@ -29,6 +29,7 @@
               <td><%= user.status%></td>
               <td>
                 <%= link_to '', edit_user_path(user),class:'fa fa-edit' %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
                 <%= link_to '', user,class:'fa fa-trash', method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
         <% end %>

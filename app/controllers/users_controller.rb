@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     #require 'md5'
     @mycpu=::Digest::MD5.hexdigest('BFEBBFFF000306C4:20161201:1:CLOUDTIMESOFT')#bfebfbff000306c3
 
+
     #c12c-7881-d171-03e5
     #BF3E-A5AC-9455-EDE4
     #5c824ae9d86c37e1db5812b5583769df
@@ -84,10 +85,6 @@ else
     end
 
     redirect_to users_path
-
-
-
-
   end
 
 
@@ -97,6 +94,7 @@ else
 
   # GET /users/1/edit
   def edit
+     @loginlogs = @user.loginlogs
 
   end
 
@@ -107,7 +105,7 @@ else
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to users_path, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }

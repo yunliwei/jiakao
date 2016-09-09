@@ -20,6 +20,10 @@ location.href='/users/createuser?num='+$('#num').val()+'&startlogin='+$('#startl
 
     });
 
+if($('#typevalue').val()=="")
+{
+    $('#typevalue').val('0');
+}
 
     $('#selecttype').change(function(){
 
