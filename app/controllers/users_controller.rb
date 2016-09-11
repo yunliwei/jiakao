@@ -21,7 +21,11 @@ class UsersController < ApplicationController
 #8180-0320-5227-611e
 #bcb1-abba-c612-776a
 #be11-e165-0214-c2bf
+    if params[:user]!='' && params[:user]!= nil
+      @users=User.where("user like '%"+params[:user]+"%'")
 
+    end
+    @usercount=@users.count
 
   end
 
@@ -52,6 +56,7 @@ class UsersController < ApplicationController
 mypwdnum=params[:pwdnum]
     mytype=params[:type]
     typevalue=params[:typevalue]
+    statusvalue=params[:statusvalue]
 
     step=0
     createsum=0
@@ -66,9 +71,9 @@ mypwdnum=params[:pwdnum]
 
         mypwd = randpassword(mypwdnum)
 if mytype=='0'
-        User.create(login:locallogin,password:mypwd,logintype:mytype,loginnumber:typevalue,status:'1')
+        User.create(login:locallogin,password:mypwd,logintype:mytype,loginnumber:typevalue,status:statusvalue)
 else
-  User.create(login:locallogin,password:mypwd,logintype:mytype,logintime:typevalue,status:'1')
+  User.create(login:locallogin,password:mypwd,logintype:mytype,logintime:typevalue,status:statusvalue)
 
         end
 

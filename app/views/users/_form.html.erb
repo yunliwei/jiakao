@@ -5,22 +5,6 @@
 
         $(document).ready(function(){
 
-            $('#create').click(function(){
-
-                var typevalue;
-                if($('#typevalue').val()==0)
-                {
-                    typevalue=$('#typenum').val();
-                }else
-                {
-                    typevalue=$('#typetime').val();
-                }
-
-                location.href='/users/createuser?num='+$('#num').val()+'&startlogin='+$('#startlogin').val()+'&pwdnum='+$('#passnum').val()+'&type='+$('#typevalue').val()+'&typevalue='+typevalue;
-
-
-            });
-
 
             $('#selecttype').change(function(){
 
@@ -52,6 +36,36 @@
                 autoclose: true
             });
 
+
+            if($('#typevalue').val()=='0')
+            {
+                $('#selecttype').val('0');
+                $('#cishu').addClass('showerr');
+                $('#cishu').removeClass('hiddenerr');
+                $('#data_1').addClass('hiddenerr');
+                $('#data_1').removeClass('showerr');
+            }else
+            {
+                $('#selecttype').val('1');
+                $('#data_1').addClass('showerr');
+                $('#data_1').removeClass('hiddenerr');
+                $('#cishu').addClass('hiddenerr');
+                $('#cishu').removeClass('showerr');
+            }
+
+            if($('#statusvalue').val()=='0')
+            {
+                $('#selectstatus').val('0');
+            }else
+            {
+                $('#selectstatus').val('1');
+            }
+$('#selectstatus').change(function(){
+    $('#statusvalue').val($(this).val());
+});
+
+
+
         });
 
 </script>
@@ -79,7 +93,7 @@
   <div class="form-group">
     <label class="col-sm-5 control-label">帐号：</label>
     <div class="col-sm-3">
-      <%= f.text_field  :login ,class:"form-control" ,onfocus:"this.blur()"%>
+      <%= f.text_field  :login ,class:"form-control",disabled:'' %>
     </div>
   </div>
 
@@ -99,17 +113,20 @@
               <option value="0">次数</option>
               <option  value="1">时间</option>
             </select>
-
-            <input hidden="hidden",id="typevalue" value="0">
-
-
+            <%= f.text_field :logintype, id:'typevalue',type:'hidden' %>
           </div>
         </div>
 
-        <div class="form-group showerr" id="cishu">
+
+
+
+
+
+
+        <div class="form-group showerr" id="cishu" style="margin-top: -14px;">
           <label class="col-sm-5 control-label">次数：</label>
           <div class="col-sm-3">
-            <input class="form-control" id="typenum">
+            <%= f.text_field :loginnumber,class:'form-control',id:'typenum' %>
           </div>
         </div>
 
@@ -118,7 +135,7 @@
           <div class="col-sm-3">
             <div class="input-group date">
               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-              <input type="text" class="form-control" id="typetime">
+              <%= f.text_field :logintime, class:'form-control',id:'typetime' %>
             </div>
           </div>
         </div>
@@ -127,12 +144,12 @@
         <div class="form-group">
           <label class="col-sm-5 control-label">权限：</label>
           <div class="col-sm-3">
-            <select class="form-control m-b" id="statutype">
+            <select class="form-control m-b" id="selectstatus">
               <option value="0">停用</option>
-              <option  value="1">正常使用</option>
+              <option  value="1">正常</option>
             </select>
-            <input hidden="hidden",id="statuvalue" value="1">
-          （1为正常使用，0为停用)
+            <%= f.text_field :status,id:'statusvalue' ,type:'hidden'%>
+          （1为正常，0为停用)
           </div>
         </div>
   <div>
