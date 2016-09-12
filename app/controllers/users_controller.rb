@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :check_login
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -22,7 +23,7 @@ class UsersController < ApplicationController
 #bcb1-abba-c612-776a
 #be11-e165-0214-c2bf
     if params[:user]!='' && params[:user]!= nil
-      @users=User.where("user like '%"+params[:user]+"%'")
+      @users=User.where("login like '%"+params[:user]+"%'").paginate(page:params[:page],per_page:10)
 
     end
     @usercount=@users.count

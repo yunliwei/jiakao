@@ -1,4 +1,5 @@
 class LoginlogsController < ApplicationController
+  before_action :check_login
   before_action :set_loginlog, only: [:show, :edit, :update, :destroy]
 
   def index

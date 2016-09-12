@@ -1,10 +1,30 @@
 <%= render 'layerbegin' %>
 <script>
   $(document).ready(function () {
-      var xingcheck;
+
+
+
+      $('.i-checks').iCheck({
+          checkboxClass: 'icheckbox_square-green',
+          radioClass: 'iradio_square-green'
+      });
+
+
+
 $('#create').click(function(){
    var cpuid=$('#cpuid').val();
     var licensetype=$('#licensetype').val();
+
+
+    if($('#licensetype').val()=='CS')
+    {
+        licensetype=0;
+    }else
+    {
+        licensetype=1;
+    }
+
+
     var licensenum=$('#licensenum').val();
     var licensetime=$('#licensetime').val();
 
@@ -33,53 +53,35 @@ alert('err');
       });
 
 
-      xingcheck='';
-      $('.xing:checked').each(function(){
 
-
-          xingcheck+=$(this).val()+":";
-
-      });
-      if(xingcheck.length>0)
-      {
-          xingcheck=tixingcheck.substring(0,xingcheck.length-1);
-      }
       //alert(ischeck);
       //return false;
-      $('#licensetype').val(xingcheck);
 
 
-      var typecheck = $('#licensetype').val().split(':');
+
+
       //alert(mycheck);
 
-      $.each( typecheck, function(i, n){
-          if(n=='CS') {
-              $('#CS').iCheck('check');
-          }
-          if(n=='JZ') {
-              $('#JZ').iCheck('check');
-          }
-
-
-      });
 
       $('#CS').on('ifChecked',function(event){
           $('#JZ').iCheck('uncheck');
           $('#csdiv').removeClass('hiddenerr');
           $('#csdiv').addClass('showerr');
-          $('#jzdiv').removeClass('showerr');
-          $('#jzdiv').addClass('hiddenerr');
-          $('#CS').iCheck('uncheck');
-          $('#CS').iCheck('uncheck');
+          $('#data_1').removeClass('showerr');
+          $('#data_1').addClass('hiddenerr');
+          $('#JZ').iCheck('uncheck');
+          $('#licensetype').val('CS');
 
       });
       $('#JZ').on('ifChecked',function(event){
           $('#CS').iCheck('uncheck');
 
-          $('#jzdiv').removeClass('hiddenerr');
-          $('#jzdiv').addClass('showerr');
+          $('#data_1').removeClass('hiddenerr');
+          $('#data_1').addClass('showerr');
           $('#csdiv').removeClass('showerr');
           $('#csdiv').addClass('hiddenerr');
+          $('#CS').iCheck('uncheck');
+          $('#licensetype').val('JZ');
       });
 
 
@@ -135,14 +137,14 @@ alert('err');
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group hiddenerr" id="csdiv">
     <label class="col-sm-2 control-label">次数：</label>
     <div class="col-sm-9">
       <input type="number" id="licensenum" class="form-control">
     </div>
   </div>
 
-  <div class="form-group" id="data_1">
+  <div class="form-group hiddenerr" id="data_1" >
     <label class="col-sm-2 control-label">截止日期：</label>
     <div class="col-sm-9">
     <div class="input-group date">
@@ -151,7 +153,7 @@ alert('err');
     </div>
   </div>
 </div>
-
+<input type="hidden" id="licensetype" >
 
     <div class="form-group">
       <label class="col-sm-2 control-label">序列号：</label>

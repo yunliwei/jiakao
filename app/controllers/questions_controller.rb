@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_action :check_login
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   # GET /questions
@@ -8,7 +9,9 @@ class QuestionsController < ApplicationController
     @questions = Question.where(isnew:'0').all.order("updated_at DESC").paginate(page:params[:page],per_page:10)
     @chapters = Chapter.all
     #@questions = Question.paginate(page:params[:page],per_page:8)
-end
+    @questioncount=@questions.count
+
+  end
 
   # GET /questions/1
   # GET /questions/1.json

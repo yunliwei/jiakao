@@ -1,10 +1,11 @@
 class ChaptersController < ApplicationController
+  before_action :check_login
   before_action :set_chapter, only: [:show, :edit, :update, :destroy]
 
   # GET /chapters
   # GET /chapters.json
   def index
-    @chapters = Chapter.all.order("updated_at DESC").paginate(page:params[:page],per_page:3)
+    @chapters = Chapter.all.order("updated_at DESC").paginate(page:params[:page],per_page:10)
 
   end
 

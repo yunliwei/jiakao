@@ -1,4 +1,5 @@
 class CreatelicensesController < ApplicationController
+  before_action :check_login
   before_action :set_createlicense, only: [:show, :edit, :update, :destroy]
   def index
 

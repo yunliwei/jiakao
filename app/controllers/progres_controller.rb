@@ -1,4 +1,5 @@
 class ProgresController < ApplicationController
+  before_action :check_login
   before_action :set_progre, only: [:show, :edit, :update, :destroy]
 
   # GET /progres

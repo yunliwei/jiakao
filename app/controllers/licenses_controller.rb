@@ -1,4 +1,5 @@
 class LicensesController < ApplicationController
+  before_action :check_login
   before_action :set_license, only: [:show, :edit, :update, :destroy]
   def destroy
     @license.destroy

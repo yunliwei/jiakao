@@ -1,4 +1,5 @@
 class CpuidsController < ApplicationController
+  before_action :check_login
   before_action :set_cpuid, only: [:show, :edit, :update, :destroy]
 
   # GET /chapters

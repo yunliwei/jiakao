@@ -1,4 +1,5 @@
 class ErrquestsController < ApplicationController
+  before_action :check_login
   before_action :set_errquest, only: [:show, :edit, :update, :destroy]
 
   # GET /errquests
