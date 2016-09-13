@@ -10,6 +10,7 @@ class QuestionsController < ApplicationController
     @chapters = Chapter.all
     #@questions = Question.paginate(page:params[:page],per_page:8)
     @questioncount=@questions.count
+    @answers=Answer.all
 
   end
 

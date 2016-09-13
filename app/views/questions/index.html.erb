@@ -17,7 +17,59 @@
         <tbody>
         <% @questions.each do |question| %>
             <tr>
-              <td style="max-width:300px;"><%= question.questionname %></td>
+              <td style="max-width:300px;">
+                <span style="color: dodgerblue">[&nbsp;
+
+                  <% if question.questiontype.to_s.include?'XD' %>
+                  对
+                      <% end %>
+                  <% if question.questiontype.to_s.include?'XC' %>
+                  错
+                      <% end %>
+                  <% if question.questiontype.to_s.include?'TP' %>
+                  图
+                      <% end %>
+                  <% if question.questiontype.to_s.include?'FTP' %>
+                  非图
+                      <% end %>
+                  <% if question.questiontype.to_s.include?'SS' %>
+                  手
+                      <% end %>
+                  <% if question.questiontype.to_s.include?'QJ' %>
+                  情
+                      <% end %>
+                  <% if question.questiontype.to_s.include?'BZ' %>
+                  标
+                      <% end %>
+
+                  <% if question.isjudge == '1' %>
+
+                  <% select_count = 0 %>
+                      <% @answers.each do |answer| %>
+
+                      <% if answer.question_id == question.id  && answer.isright == 1 %>
+                          <% select_count = select_count.to_i + 1 %>
+                          <% end %>
+
+
+                      <% end %>
+
+                      <% if select_count.to_i > 1 %>
+                      多
+                          <% else %>
+                      单
+                      <% end %>
+
+        <% end %>
+
+
+
+
+
+
+                ]</span>
+                <%= question.questionname %>
+              </td>
               <td>
               <%= link_to '', edit_question_path(question),class:'fa fa-edit' %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <%= link_to '', question,class:'fa fa-trash', method: :delete, data: { confirm: 'Are you sure?' } %></td>

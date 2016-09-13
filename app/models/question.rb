@@ -1,7 +1,7 @@
 class Question < ActiveRecord::Base
   before_update :randomize_questionimage
   before_update :randomize_voice
-  has_many :answers
+  has_many :answers,dependent: :destroy
   has_many :errquests
   has_many :progres
   has_many :chapters
@@ -16,6 +16,10 @@ class Question < ActiveRecord::Base
   #validates_attachment_content_type :voice,  :content_type => [ 'application/mp3', 'application/x-mp3', 'audio/mpeg', 'audio/mp3' ], :allow_nil => true
   #validates_attachment_content_type :voice, :content_type => 'audio/mpeg'
   #validates_attachment_content_type :voice,:content_type => [ 'application/mp3', 'application/x-mp3', 'audio/mpeg', 'audio/mp3' ],:allow_nil => true
+
+
+
+
 
 
 

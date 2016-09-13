@@ -102,12 +102,14 @@
           <label class="col-sm-5 control-label">权限：</label>
           <div class="col-sm-3">
             <%= f.text_field :auth,class:"form-control" %>
+            (权限暂设为：'1' [正常]  '0' [无权限]）
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-5 control-label">状态：</label>
           <div class="col-sm-3">
             <%= f.text_field :status,class:"form-control" %>
+            (状态可写1和0  ‘1’ 【正常】‘0’ 【停用】）
           </div>
         </div>
         <%= f.submit '确定',class: "btn btn-w-m btn-success mylink pull-right",id:'smt','data-no-turbolink'=>true %>

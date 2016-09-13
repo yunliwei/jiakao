@@ -9,7 +9,7 @@ class LoginlogsController < ApplicationController
     #@users=User.all
 
 
-
+    @loginlogcount=@loginlogs.count
 
   end
   def show

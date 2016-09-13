@@ -77,10 +77,7 @@ if(!(recpt && resub))
         });
 
 
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green'
-        });
+
 
 
         var mycheck = $('#driverlicensetype').val().split(':');
@@ -171,49 +168,7 @@ if(!(recpt && resub))
             });
         });
 
-        var typecheck = $('#questiontype').val().split(':');
-        //alert(mycheck);
 
-        $.each( typecheck, function(i, n){
-            if(n=='XZ') {
-                $('#XZ').iCheck('check');
-            }
-            if(n=='TP') {
-                $('#TP').iCheck('check');
-            }
-            if(n=='FTP') {
-                $('#FTP').iCheck('check');
-            }
-
-
-
-
-            if(n=='PD') {
-                $('#PD').iCheck('check');
-            }
-
-            if(n=='SS') {
-                $('#SS').iCheck('check');
-            }
-
-            if(n=='XD') {
-                $('#XD').iCheck('check');
-            }
-
-
-
-            if(n=='QJ') {
-                $('#QJ').iCheck('check');
-            }
-            if(n=='BZ') {
-                $('#BZ').iCheck('check');
-            }
-            if(n=='XC') {
-                $('#XC').iCheck('check');
-            }
-
-
-        });
 
 
 
@@ -336,6 +291,50 @@ if($('#isjudge').val()=='')
 
 
 
+        $('#XZ').iCheck('uncheck');
+        $('#TP').iCheck('uncheck');
+        $('#FTP').iCheck('uncheck');
+        $('#PD').iCheck('uncheck');
+        $('#SS').iCheck('uncheck');
+        $('#SD').iCheck('uncheck');
+        $('#QJ').iCheck('uncheck');
+        $('#BZ').iCheck('uncheck');
+        $('#XC').iCheck('uncheck');
+
+        var typecheck = $('#questiontype').val().split(':');
+        //alert(mycheck);
+
+        $.each( typecheck, function(i, n){
+            if(n=='XZ') {
+                $('#XZ').iCheck('check');
+            }
+            if(n=='TP') {
+                $('#TP').iCheck('check');
+            }
+            if(n=='FTP') {
+                $('#FTP').iCheck('check');
+            }
+            if(n=='PD') {
+                $('#PD').iCheck('check');
+            }
+            if(n=='SS') {
+                $('#SS').iCheck('check');
+            }
+            if(n=='XD') {
+                $('#XD').iCheck('check');
+            }
+            if(n=='QJ') {
+                $('#QJ').iCheck('check');
+            }
+            if(n=='BZ') {
+                $('#BZ').iCheck('check');
+            }
+            if(n=='XC') {
+                $('#XC').iCheck('check');
+            }
+
+
+        });
 
 
 $('#img1').attr('src',$('#questionimageurl').val());

@@ -21,8 +21,30 @@
             <tr>
               <td><%= admin.adminname %></td>
               <td><%= admin.login %></td>
-              <td><%= admin.auth %></td>
-              <td><%= admin.status %></td>
+
+
+
+
+              <td>
+                <% if admin.auth =='1'%>
+                    有权限
+                <% else %>
+                    无权限
+                <% end %>
+               </td>
+              <td>
+               <% if admin.status == 1 %>
+                    正常
+                    <% else %>
+                    停用
+                    <% end %>
+             </td>
+
+
+
+
+
+
               <td><%= link_to '编辑', edit_admin_path(admin) %>
                 <%= link_to '删除', admin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
