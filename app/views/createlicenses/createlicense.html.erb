@@ -13,25 +13,13 @@
 
 $('#create').click(function(){
    var cpuid=$('#cpuid').val();
-    var licensetype=$('#licensetype').val();
-
-
-    if($('#licensetype').val()=='CS')
-    {
-        licensetype=0;
-    }else
-    {
-        licensetype=1;
-    }
-
-
     var licensenum=$('#licensenum').val();
     var licensetime=$('#licensetime').val();
 
     $.ajax({
         type:'get',
         dataType:'json',
-        url:'/createlicenses/ajaxcreate?cpuid='+cpuid+'&licensetype='+licensetype+'&licensenum='+licensenum+'&licensetime='+licensetime,
+        url:'/createlicenses/ajaxcreate?cpuid='+cpuid+'&licensenum='+licensenum+'&licensetime='+licensetime,
         success:function(data) {
             $('#license').val(data[0].license);
             $('#create').attr('disabled',"true");
@@ -63,26 +51,17 @@ alert('err');
       //alert(mycheck);
 
 
-      $('#CS').on('ifChecked',function(event){
-          $('#JZ').iCheck('uncheck');
-          $('#csdiv').removeClass('hiddenerr');
-          $('#csdiv').addClass('showerr');
-          $('#data_1').removeClass('showerr');
-          $('#data_1').addClass('hiddenerr');
-          $('#JZ').iCheck('uncheck');
-          $('#licensetype').val('CS');
+      date = new Date();
+      var ms = 30 * (1000 * 60 * 60 * 24);
+      var newDate = new Date(date.getTime() + ms);
+var myday =newDate.getFullYear()+"-";
+      myday+=newDate.getMonth()+1;
+      myday+='-';
+      myday+=newDate.getDate();
+      $('#licensetime').val(myday);
 
-      });
-      $('#JZ').on('ifChecked',function(event){
-          $('#CS').iCheck('uncheck');
 
-          $('#data_1').removeClass('hiddenerr');
-          $('#data_1').addClass('showerr');
-          $('#csdiv').removeClass('showerr');
-          $('#csdiv').addClass('hiddenerr');
-          $('#CS').iCheck('uncheck');
-          $('#licensetype').val('JZ');
-      });
+
 
 
 
@@ -94,6 +73,25 @@ alert('err');
 
 
   });
+
+  Date.prototype.Format=function(fmt)
+  { //author: meizz
+      var o = {
+          "M+" : this.getMonth()+1,                 //月份
+          "d+" : this.getDate(),                    //日
+          "h+" : this.getHours(),                   //小时
+          "m+" : this.getMinutes(),                 //分
+          "s+" : this.getSeconds(),                 //秒
+          "q+" : Math.floor((this.getMonth()+3)/3), //季度
+          "S"  : this.getMilliseconds()             //毫秒
+      };
+      if(/(y+)/.test(fmt))
+          fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+      for(var k in o)
+          if(new RegExp("("+ k +")").test(fmt))
+              fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+      return fmt;
+  }
 </script>
 
 <style type="text/css">
@@ -109,42 +107,21 @@ alert('err');
   <h3>序列号</h3>
 
   <div class="form-group">
-    <label class="col-sm-2 control-label">CPUID：</label>
+    <label class="col-sm-2 control-label">机器码：</label>
     <div class="col-sm-9">
       <input id="cpuid" class="form-control">
     </div>
   </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label">类型：</label>
-    <div class="col-sm-9">
-      <div class="col-sm-12">
-        <table>
-          <td>
-            <div class="icheckbox i-checks">
-              <label>
-                <input type="checkbox" id="CS" value="CS" class="xing"> <i></i> 次数</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </div>
-          </td>
-          <td>
-            <div class="icheckbox i-checks">
-              <label>
-                <input type="checkbox" id="JZ" value="JZ" class="xing"> <i></i>截止日期 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </div>
-          </td>
-            </table>
-      </div>
-    </div>
-  </div>
 
-  <div class="form-group hiddenerr" id="csdiv">
+  <div class="form-group" id="csdiv">
     <label class="col-sm-2 control-label">次数：</label>
     <div class="col-sm-9">
-      <input type="number" id="licensenum" class="form-control">
+      <input type="number" id="licensenum" class="form-control" value="100">
     </div>
   </div>
 
-  <div class="form-group hiddenerr" id="data_1" >
+  <div class="form-group" id="data_1" >
     <label class="col-sm-2 control-label">截止日期：</label>
     <div class="col-sm-9">
     <div class="input-group date">

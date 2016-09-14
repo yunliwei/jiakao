@@ -52,32 +52,20 @@ class CreatelicensesController < ApplicationController
       lastcpuid=Cpuid.last
     end
 
-    @licensetype='1'
-    if params[:licensetype] == '0'
-      @licensetype='0'
-    end
-
     licensevalue=''
-    if @licensetype=='1'
-      licensevalue=params[:licensetime].to_s.delete('-')
-    else
-      licensevalue=params[:licensenum]
-    end
+      licensenumber=params[:licensenum]
+      licensetime=params[:licensetime].to_s.delete('-')
 
 
-    licensestr=params[:cpuid].to_s.upcase+':'+licensevalue+':'+@licensecount.to_s+':CLOUDTIMESOFT'
+    licensestr=params[:cpuid].to_s.upcase+':'+licensenumber+':'+licensetime+':'+@licensecount.to_s+':CLOUDTIMESOFT'
     @temlicense=::Digest::MD5.hexdigest(licensestr)#bfebfbff000306c3
     license=@temlicense.to_s[8,16]
     license.to_s.upcase!
 
-
-    licenseA =license[0,3]
-    licenseB=license[4,15]
-    license=licenseA+@licensetype.to_s+licenseB
     license.insert(12,'-')
     license.insert(8,'-')
     license.insert(4,'-')
-    License.create(cpuid_id:lastcpuid.id,license:license,licensetype:@licensetype,licensenum:params[:licensenum],licensetime:params[:licensetime])
+    License.create(cpuid_id:lastcpuid.id,license:license,licensenum:params[:licensenum],licensetime:params[:licensetime])
 
 
 license='[{"license"'+':"' +license+'"}]'

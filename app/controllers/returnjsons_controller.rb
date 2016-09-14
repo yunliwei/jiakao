@@ -42,15 +42,27 @@ class ReturnjsonsController < ApplicationController
   def getuser
     loc=''
     #debugger
-begin
+
     location = getip(params[:ip])
 
     location_json = JSON.parse(location)
     #pp test
-    loc = location_json['retData']['province']+'省 '+location_json['retData']['city']+'市 '+location_json['retData']['carrier']
-rescue
-  loc=''
-  end
+
+
+
+    10.times do
+      begin
+        loc = location_json['retData']['province']+'省 '+location_json['retData']['city']+'市 '+location_json['retData']['carrier']
+      rescue
+        loc=''
+      end
+      if loc != ''
+        break
+      end
+    end
+
+
+
       login=params[:login]
     validate=params[:validate]
 #login = 'add86'
