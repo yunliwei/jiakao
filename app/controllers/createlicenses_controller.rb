@@ -58,6 +58,7 @@ class CreatelicensesController < ApplicationController
 
 
     licensestr=params[:cpuid].to_s.upcase+':'+licensenumber+':'+licensetime+':'+@licensecount.to_s+':CLOUDTIMESOFT'
+
     @temlicense=::Digest::MD5.hexdigest(licensestr)#bfebfbff000306c3
     license=@temlicense.to_s[8,16]
     license.to_s.upcase!
