@@ -39,8 +39,8 @@
           <th class="text-center">机器码</th>
           <th class="text-center">序列号</th>
           <th class="text-center">生成时间</th>
-          <th class="text-center">类型</th>
-          <th class="text-center">次数/截止日期</th>
+          <th class="text-center">次数</th>
+          <th class="text-center">截止日期</th>
           <th class="text-center">操作</th>
         </tr>
         </thead>
@@ -77,18 +77,10 @@
                       <td><%= license.license %></td>
                       <td><%= license.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
                       <td>
-                        <% if license.licensetype==1 %>
-                        截止时间
-                            <% else %>
-                        次数
-                        <% end %>
+                        <%= license.licensenum %>
                       </td>
                       <td>
-                        <% if license.licensetype==1 %>
                         <%= license.licensetime %>
-                            <% else %>
-                            <%= license.licensenum %>
-                        <% end %>
                       </td>
 <td>
   <%= link_to '', license,class:'fa fa-trash', method: :delete, data: { confirm: 'Are you sure?' } %>

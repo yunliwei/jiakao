@@ -44,20 +44,12 @@ class CreatelicensesController < ApplicationController
     @licensecount=0
     @cpuid=Cpuid.find_by_cpuid(params[:cpuid])
     #@cpuid=Cpuid.where(cpuid:params[:cpuid])
-    if @cpuid != nil
-      @licensecount=@cpuid.licenses.all.count
-      lastcpuid=@cpuid
-    else
-      Cpuid.create(cpuid:params[:cpuid].to_s.upcase)
-      lastcpuid=Cpuid.last
-    end
-
     licensevalue=''
       licensenumber=params[:licensenum]
       licensetime=params[:licensetime].to_s.delete('-')
 
 
-    licensestr=params[:cpuid].to_s.upcase+':'+licensenumber+':'+licensetime+':'+@licensecount.to_s+':CLOUDTIMESOFT'
+    licensestr=params[:cpuid].to_s.upcase+':'+licensenumber+':'+licensetime+':CLOUDTIMESOFT'
 
     @temlicense=::Digest::MD5.hexdigest(licensestr)#bfebfbff000306c3
     license=@temlicense.to_s[8,16]
@@ -66,7 +58,12 @@ class CreatelicensesController < ApplicationController
     license.insert(12,'-')
     license.insert(8,'-')
     license.insert(4,'-')
-    License.create(cpuid_id:lastcpuid.id,license:license,licensenum:params[:licensenum],licensetime:params[:licensetime])
+
+    @licenses=License.where(license:license)
+    if @licenses == nil
+      License.create(cpuid_id:lastcpuid.id,license:license,licensenum:params[:licensenum],licensetime:params[:licensetime])
+    end
+
 
 
 license='[{"license"'+':"' +license+'"}]'
