@@ -3,10 +3,7 @@
   <div class="ibox float-e-margins">
     <div class="ibox-title">
       <h3>题目<br>
-
-
       </h3>
-
     </div>
     <div class="ibox-content">
       <table class="table table-hover table-bordered text-center">
@@ -21,12 +18,10 @@
         <% @questions.each do |question| %>
             <tr>
               <td style="max-width:300px;">
-
                 <%= question.questionname %>
               </td>
               <td>
                 <span style="color: dodgerblue">[&nbsp;
-
                   <% if question.questiontype.to_s.include?'XD' %>
                   对
                       <% end %>
@@ -48,32 +43,24 @@
                   <% if question.questiontype.to_s.include?'BZ' %>
                   标
                       <% end %>
-
                   <% if question.isjudge == '1' %>
-
                   <% select_count = 0 %>
                       <% @answers.each do |answer| %>
-
                       <% if answer.question_id == question.id  && answer.isright == 1 %>
                           <% select_count = select_count.to_i + 1 %>
                           <% end %>
-
-
                       <% end %>
-
                       <% if select_count.to_i > 1 %>
                       多
                           <% else %>
                       单
                       <% end %>
-
         <% end %>
-
                   ]</span>
               </td>
               <td>
-              <%= link_to '', edit_question_path(question),class:'fa fa-edit' %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <%= link_to '', question,class:'fa fa-trash', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <%= link_to '', edit_question_path(question),class:'fa fa-edit' %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <%= link_to '', question,class:'fa fa-trash', method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
         <% end %>
         </tbody>
@@ -84,12 +71,11 @@
 单
            ]</span>：
         单项选择题
-<br><br>
+        <br><br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <span style="color: dodgerblue">[&nbsp;
 多
            ]</span>：
-
         多项选择题
         <br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  <span style="color: dodgerblue">[&nbsp;
@@ -107,7 +93,6 @@
 图
            ]</span>：
         图片题
-
         <br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  <span style="color: dodgerblue">[&nbsp;
 手
@@ -134,20 +119,16 @@
       </h4>
 
 
+      
       <div class="text-center">
         题目总数：<%= @questioncount %>
       </div>
-
       <div class="text-center">
-
         <%= will_paginate @questions, previous_label:'上一页', next_label: '下一页' %>
       </div>
       <%= link_to "新增", new_question_path,class: "btn btn-w-m btn-success mylink pull-right" ,'data-no-turbolink'=>true%>
       <br>
     </div>
-
   </div>
 </div>
-
-
 <%= render 'layerend' %>
