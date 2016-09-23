@@ -20,6 +20,8 @@
               <td style="max-width:300px;">
                 <%= question.questionname %>
               </td>
+
+
               <td>
                 <span style="color: dodgerblue">[&nbsp;
                   <% if question.questiontype.to_s.include?'XD' %>
@@ -58,6 +60,9 @@
         <% end %>
                   ]</span>
               </td>
+
+
+
               <td>
                 <%= link_to '', edit_question_path(question),class:'fa fa-edit' %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <%= link_to '', question,class:'fa fa-trash', method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -65,61 +70,10 @@
         <% end %>
         </tbody>
       </table>
-      <h4>
-        注:&nbsp;
-        <span style="color: dodgerblue">[&nbsp;
-单
-           ]</span>：
-        单项选择题
-        <br><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span style="color: dodgerblue">[&nbsp;
-多
-           ]</span>：
-        多项选择题
-        <br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- <span style="color: dodgerblue">[&nbsp;
-对
-           ]</span>：
-        判断题选对的答案
-        <br><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span style="color: dodgerblue">[&nbsp;
-错
-           ]</span>：
-        判断题选错的答案
-        <br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- <span style="color: dodgerblue">[&nbsp;
-图
-           ]</span>：
-        图片题
-        <br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- <span style="color: dodgerblue">[&nbsp;
-手
-           ]</span>：
-        手势题
-        <br><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span style="color: dodgerblue">[&nbsp;
-标
-           ]</span>：
-        标志题
-        <br><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span style="color: dodgerblue">[&nbsp;
-情
-           ]</span>：
-        情景题
-        <br><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span style="color: dodgerblue">[&nbsp;
-非图
-           ]</span>：
-        非图片题
-      </h4>
 
 
-      
+
+<br>
       <div class="text-center">
         题目总数：<%= @questioncount %>
       </div>
@@ -130,5 +84,57 @@
       <br>
     </div>
   </div>
+  <h4>
+    注:&nbsp;
+        <span style="color: dodgerblue">[&nbsp;
+单
+           ]</span>：
+    单项选择题
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="color: dodgerblue">[&nbsp;
+多
+           ]</span>：
+    多项选择题
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <span style="color: dodgerblue">[&nbsp;
+对
+           ]</span>：
+    判断题选对的答案
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="color: dodgerblue">[&nbsp;
+错
+           ]</span>：
+    判断题选错的答案
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <span style="color: dodgerblue">[&nbsp;
+图
+           ]</span>：
+    图片题
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <span style="color: dodgerblue">[&nbsp;
+手
+           ]</span>：
+    手势题
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="color: dodgerblue">[&nbsp;
+标
+           ]</span>：
+    标志题
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="color: dodgerblue">[&nbsp;
+情
+           ]</span>：
+    情景题
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="color: dodgerblue">[&nbsp;
+非图
+           ]</span>：
+    非图片题
+  </h4>
 </div>
 <%= render 'layerend' %>
