@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       get 'subject'
       get 'getvalidate'
       get 'getuser'
+      get 'changepassword'
     end
   end
   resources :createlicenses do

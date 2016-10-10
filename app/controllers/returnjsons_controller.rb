@@ -92,6 +92,31 @@ class ReturnjsonsController < ApplicationController
 
   end
 
+
+
+  def changepassword
+    oldpassword=params[:oldpassword]
+    newpassword=params[:newpassword]
+    login=params[:login]
+    user =User.find_by_login(login)
+    hexpassword=::Digest::MD5.hexdigest(user.password).to_s.upcase!
+    if hexpassword == oldpassword
+      user.password=newpassword
+      user.save
+      render json:('[{"status":"密码修改成功！"}]')
+    else
+      render json:('[{"status":"原始密码不正确！"}]')
+    end
+
+
+
+
+  end
+
+
+
+
+
 private
 def getip(ip)
   conn = Faraday.new(:url => 'http://apis.baidu.com') do |faraday|
