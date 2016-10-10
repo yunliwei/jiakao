@@ -55,8 +55,9 @@ class UsersController < ApplicationController
     num=params[:num].to_i
     login = params[:startlogin].to_s
 mypwdnum=params[:pwdnum]
-    mytype=params[:type]
-    typevalue=params[:typevalue]
+    #mytype=params[:type]
+    typenum=params[:typenum]
+    typetime=params[:typetime]
     statusvalue=params[:statusvalue]
 
     step=0
@@ -71,12 +72,9 @@ mypwdnum=params[:pwdnum]
       else
 
         mypwd = randpassword(mypwdnum)
-if mytype=='0'
-        User.create(login:locallogin,password:mypwd,logintype:mytype,loginnumber:typevalue,status:statusvalue)
-else
-  User.create(login:locallogin,password:mypwd,logintype:mytype,logintime:typevalue,status:statusvalue)
 
-        end
+        User.create(login:locallogin,password:mypwd,logintype:1,loginnumber:typenum,logintime:typetime,status:statusvalue)
+
 
 
         step=step+1
