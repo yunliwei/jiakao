@@ -445,26 +445,6 @@ $('#img1').attr('src',$('#questionimageurl').val());
 
 
         <div class="form-group">
-          <label class="col-sm-2 control-label">章节：</label>
-
-          <div class="col-sm-9">
-            <select class="form-control m-b" id="chapter">
-
-              <option value="0">选择章节</option>
-              <% @chapters.each do |chapter| %>
-              <option value=<%= chapter.id %>>
-                    <%= chapter.chapter %>
-              </option>
-              <% end %>
-            </select>
-            <div id="chaptererr" class="hiddenerr"><span style="color: red;">请选择章节</span></div>
-          </div>
-        </div>
-
-        <%= f.hidden_field :chapter_id,id:'chapterid' %>
-
-
-        <div class="form-group">
           <label class="col-sm-2 control-label">学科：</label>
 
           <div class="col-sm-9">
@@ -482,7 +462,24 @@ $('#img1').attr('src',$('#questionimageurl').val());
 
         <%= f.hidden_field :subject_id,id:'subjectid' %>
 
+        <div class="form-group">
+          <label class="col-sm-2 control-label">章节：</label>
 
+          <div class="col-sm-9">
+            <select class="form-control m-b" id="chapter">
+
+              <option value="0">选择章节</option>
+              <% @chapters.each do |chapter| %>
+                  <option value=<%= chapter.id %>>
+                    <%= chapter.chapter %>
+                  </option>
+              <% end %>
+            </select>
+            <div id="chaptererr" class="hiddenerr"><span style="color: red;">请选择章节</span></div>
+          </div>
+        </div>
+
+        <%= f.hidden_field :chapter_id,id:'chapterid' %>
 
 
 

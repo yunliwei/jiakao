@@ -75,7 +75,7 @@ class ReturnjsonsController < ApplicationController
     nowtime=Time.now
     if nowtime - DateTime.parse(usertime.to_s) < 10 && validate==myvalidate
       render json:(myuser)
-      if myuser.logintype=='0'
+
 
         #'http://apis.baidu.com/apistore/iplookupservice/iplookup?ip=117.89.35.58 -H apikey:6e1802f8c0cd1b42b32249ba42c2e602y'
 
@@ -84,7 +84,7 @@ class ReturnjsonsController < ApplicationController
 
          myuser.loginnumber= myuser.loginnumber.to_i - 1
         myuser.save
-      end
+
       Loginlog.create(user_id:myuser.id,ip:params[:ip],location:loc)
     else
       render json:('[{"status":"error"}]')

@@ -2,71 +2,79 @@
 <%= render 'layerbegin' %>
 
 <script>
+    $(document).ready(function(){
 
-        $(document).ready(function(){
+        $('#create').click(function(){
 
-
-            $('#selecttype').change(function(){
-
-                $('#typevalue').val($(this).val());
-
-                if($(this).val()==0)
-                {
-                    $('#cishu').addClass('showerr');
-                    $('#cishu').removeClass('hiddenerr');
-                    $('#data_1').addClass('hiddenerr');
-                    $('#data_1').removeClass('showerr');
-                }else
-                {
-                    $('#data_1').addClass('showerr');
-                    $('#data_1').removeClass('hiddenerr');
-                    $('#cishu').addClass('hiddenerr');
-                    $('#cishu').removeClass('showerr');
-                }
-
-            });
-
-
-
-            $('#data_1 .input-group.date').datepicker({
-                todayBtn: "linked",
-                keyboardNavigation: false,
-                forceParse: false,
-                calendarWeeks: true,
-                autoclose: true
-            });
-
-
-            if($('#typevalue').val()=='0')
+            var typevalue;
+            if($('#typevalue').val()==0)
             {
-                $('#selecttype').val('0');
+                typevalue=$('#typenum').val();
+
+            }else
+            {
+                typevalue=$('#typetime').val();
+            }
+
+
+            location.href='/users/createuser?num='+$('#num').val()+'&startlogin='+$('#startlogin').val()+'&pwdnum='+$('#passnum').val()+'&typenum='+$('#typenum').val()+'&typetime='+$('#typetime').val()+'&statusvalue='+$('#statusvalue').val();
+
+
+
+        });
+
+        if($('#typevalue').val()=="")
+        {
+            $('#typevalue').val('0');
+        }
+
+        $('#selecttype').change(function(){
+
+            $('#typevalue').val($(this).val());
+
+            if($(this).val()==0)
+            {
                 $('#cishu').addClass('showerr');
                 $('#cishu').removeClass('hiddenerr');
                 $('#data_1').addClass('hiddenerr');
                 $('#data_1').removeClass('showerr');
             }else
             {
-                $('#selecttype').val('1');
                 $('#data_1').addClass('showerr');
                 $('#data_1').removeClass('hiddenerr');
                 $('#cishu').addClass('hiddenerr');
                 $('#cishu').removeClass('showerr');
             }
 
-            if($('#statusvalue').val()=='0')
-            {
-                $('#selectstatus').val('0');
-            }else
-            {
-                $('#selectstatus').val('1');
-            }
-$('#selectstatus').change(function(){
-    $('#statusvalue').val($(this).val());
-});
-
-
-
         });
+
+
+
+        $('#data_1 .input-group.date').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
+
+        if($('#statusvalue').val()=='')
+        {
+            $('#statusvalue').val('1');
+        }
+
+        $('#selectstatus').change(function(){
+            $('#statusvalue').val($(this).val());
+        })
+
+
+
+
+    });
+
+
+
+
 
 </script>
 
@@ -112,8 +120,7 @@ $('#selectstatus').change(function(){
 
 
 
-
-
+<br>
         <div class="form-group showerr" id="cishu" style="margin-top: -14px;">
           <label class="col-sm-5 control-label">次数：</label>
           <div class="col-sm-3">
@@ -121,7 +128,9 @@ $('#selectstatus').change(function(){
           </div>
         </div>
 
-        <div class="form-group hiddenerr" id="data_1">
+
+
+        <div class="form-group showerr" id="data_1">
           <label class="col-sm-5 control-label">截止日期：</label>
           <div class="col-sm-3">
             <div class="input-group date">
@@ -136,11 +145,12 @@ $('#selectstatus').change(function(){
           <label class="col-sm-5 control-label">权限：</label>
           <div class="col-sm-3">
             <select class="form-control m-b" id="selectstatus">
-              <option value="0">停用</option>
+
               <option  value="1">正常</option>
+              <option value="0">停用</option>
             </select>
             <%= f.text_field :status,id:'statusvalue' ,type:'hidden'%>
-          （1为正常，0为停用)
+
           </div>
         </div>
   <div>
