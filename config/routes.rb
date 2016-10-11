@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       get 'getvalidate'
       get 'getuser'
       get 'changepassword'
+      get 't_errquests'
     end
   end
   resources :createlicenses do

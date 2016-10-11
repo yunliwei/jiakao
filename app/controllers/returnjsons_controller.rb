@@ -114,6 +114,22 @@ class ReturnjsonsController < ApplicationController
   end
 
 
+  def r_errquests
+
+    errquestions = Errquest.where(user_id:params[:user_id])
+    render json:(errquestions)
+
+  end
+
+
+
+
+
+
+  def t_errquests
+      Errquest.create(question_id:params[:login])
+      render json:('[{"status":"原始密码不正确！"}]')
+  end
 
 
 
@@ -134,6 +150,11 @@ def getip(ip)
   return request.body
 
 end
+
+
+
+
+
 
 
 
