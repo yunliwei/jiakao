@@ -21,7 +21,11 @@ Rails.application.routes.draw do
     end
   end
   resources :progres
-  resources :errquests
+  resources :errquests do
+    collection do
+      get 'errcount'
+    end
+  end
   resources :chapters
   resources :logins
   resources :returnjsons do

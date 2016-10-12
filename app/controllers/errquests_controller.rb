@@ -5,7 +5,20 @@ class ErrquestsController < ApplicationController
   # GET /errquests
   # GET /errquests.json
   def index
-    @errquests = Errquest.all
+    @errquests = Errquest.all.order("updated_at DESC").paginate(page:params[:page],per_page:15)
+    @users =User.all
+    @questions= Question.all
+
+  end
+
+  def errcount
+errs=Errquest.all
+    errcounts=Array.new
+    errs.each do |err|
+myerr=Myerr.new
+      errs.insert(myerr)
+    end
+
   end
 
   # GET /errquests/1
@@ -70,6 +83,16 @@ class ErrquestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def errquest_params
-      params.require(:errquest).permit(:amount)
+      params.require(:errquest).permit(:amount,:user_id,:question_id)
     end
+
+  class Myerr
+    def question
+
+    end
+    def amount
+
+    end
+  end
+
 end
