@@ -4,6 +4,7 @@ class LoginlogsController < ApplicationController
 
   def index
     #@loginlogs = Loginlog.all.order("updated_at DESC").paginate(page:params[:page],per_page:10)
+
     @loginlogs = Loginlog.find_by_sql("select users.login,loginlogs.* from users,loginlogs where users.id = loginlogs.user_id")
     #@loginlogs=@loginlogs.paginate(page:params[:page],per_page:10)
     #@users=User.all

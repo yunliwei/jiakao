@@ -8,17 +8,33 @@ class ErrquestsController < ApplicationController
     @errquests = Errquest.all.order("updated_at DESC").paginate(page:params[:page],per_page:15)
     @users =User.all
     @questions= Question.all
+    @errcounts =@errquests.count
 
   end
 
   def errcount
-errs=Errquest.all
-    errcounts=Array.new
+    @questions= Question.all
+    errs=Errquest.all
+    @errcounts=Array.new
     errs.each do |err|
-myerr=Myerr.new
-      errs.insert(myerr)
+      flag = false
+      for i in 0..@errcounts.count()-1
+        flagerr=Hash.new
+        if @errcounts.count()>0
+          if @errcounts[i][:question].to_i == err.question_id.to_i
+            flagerr={question:@errcounts[i][:question],amount:@errcounts[i][:amount].to_i+err.amount}
+            @errcounts[i]=flagerr
+            flag = true
+            break
+          end
+        end
+      end
+      if !flag
+        myerr=Hash.new
+        myerr={question:err.question_id,amount:err.amount}
+        @errcounts.push(myerr)
+      end
     end
-
   end
 
   # GET /errquests/1

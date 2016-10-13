@@ -117,9 +117,18 @@ class ReturnjsonsController < ApplicationController
   end
 
   def t_errquests
+
+    del = params[:command]
     questions =params[:q]
     amounts=params[:a]
     userid=params[:user_id]
+
+    if del != nil
+      delerr = Errquest.where(user_id:userid)
+      delerr.each do |del|
+        del.destroy
+      end
+    end
 
     step=0
     Errquest.transaction do
@@ -142,7 +151,7 @@ class ReturnjsonsController < ApplicationController
 #url => 'http://apis.baidu.com'
 private
 def getip(ip)
-  conn = Faraday.new(:url => 'http://apis.baidu.com/apix/apix_ip/ipinfo') do |faraday|
+  conn = Faraday.new(:url => 'http://apis.baidu.com') do |faraday|
     faraday.request  :url_encoded             # form-encode POST params
     faraday.response :logger                  # log requests to STDOUT
     faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
@@ -150,7 +159,7 @@ def getip(ip)
   conn.headers[:apikey] = '6e1802f8c0cd1b42b32249ba42c2e602'
   conn.params[:ip]=ip
   request = conn.get do |req|
-    req.url '/apistore/iplookupservice/iplookup'
+    req.url '/apistore/iplookup/iplookup_paid'
   end
   return request.body
   debugger
