@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'logins#index'
   resources :admins do
     collection do
      get 'chkrpt'
