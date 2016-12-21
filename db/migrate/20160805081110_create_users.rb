@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :studentid
       t.string :sex
       t.integer :age
-      t.integer :idcard
+      t.string :idcard
       t.string :name
       t.string :money
       t.string :model

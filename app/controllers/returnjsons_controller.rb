@@ -129,13 +129,14 @@ class ReturnjsonsController < ApplicationController
         del.destroy
       end
     end
-
+#debugger
     step=0
     Errquest.transaction do
     if(questions!=nil)
       questions.each do |f|
-        Errquest.create(user_id:userid,question_id:f,amount:amounts[step])
+        Errquest.create(user_id:userid.to_i,question_id:f,amount:amounts[step])
         step=step+1
+        #debugger
       end
     end
     end
@@ -145,6 +146,45 @@ class ReturnjsonsController < ApplicationController
     #debugger
      # Errquest.create(question_id:params[:login])
       render json:('[{"status":"原始密码不正确！"}]')
+  end
+
+  def del_errquests
+    questions=params[:q]
+    userid=params[:user_id]
+    if questions != nil
+      delerr = Errquest.where("user_id="+userid+"and id in("+questions+")" )
+      delerr.each do |del|
+        del.destroy
+      end
+    end
+  end
+
+  def reguser
+    name=params[:name]
+    password=params[:password]
+    login=params[:login]
+    phone=params[:phone]
+    idcard=params[:idcard].to_s
+    education=params[:education]
+    studentid=params[:studentid]
+    money=params[:money]
+    sex=params[:sex]
+
+    loginuser=User.find_by(login:login)
+    if loginuser != nil
+      render render json:('[{"status":"0"}]')#账号已存在
+    end
+
+    phoneuser=User.find_by(phonenumber:phone)
+    if phoneuser != nil
+      render render json:('[{"status":"1"}]')#手机号码已存在
+    end
+
+    if loginuser == nil && phoneuser == nil
+      User.create(login:login,password:password,studentid:studentid,sex:sex,idcard:idcard,name:name,money:money,education:education,phonenumber:phone,status:'3')
+      render render json:('[{"status":"2"}]')#注册成功
+    end
+
   end
 
 

@@ -41,6 +41,8 @@ Rails.application.routes.draw do
       get 'changepassword'
       get 't_errquests'
       get 'r_errquests'
+      get 'reguser'
+      get 'del_errquests'
     end
   end
   resources :createlicenses do

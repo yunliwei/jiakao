@@ -7,7 +7,7 @@ class CreatelicensesController < ApplicationController
     @licenses=License.all
     if params[:cpuid]!='' && params[:cpuid]!= nil
       @cpuids=Cpuid.where("cpuid like '%"+params[:cpuid]+"%'")
-
+debugger
     end
 
 
@@ -18,7 +18,6 @@ class CreatelicensesController < ApplicationController
       @licenses.each do |f|
       cpu_ids=cpu_ids+f.cpuid_id.to_s+','
       end
-
       if cpu_ids.length>0
         cpu_ids=cpu_ids[0,cpu_ids.length-1]
         @cpuids=Cpuid.where('id in ('+cpu_ids+')')
@@ -33,7 +32,7 @@ class CreatelicensesController < ApplicationController
     @cpucount=@cpuids.count
     @licensecount = @licenses.count
 
-
+#debugger
   end
 
   def createlicense
@@ -43,14 +42,18 @@ class CreatelicensesController < ApplicationController
   def ajaxcreate
     @licensecount=0
     @cpuid=Cpuid.find_by_cpuid(params[:cpuid])
+    if @cpuid == nil
+      Cpuid.create(cpuid:params[:cpuid])
+    end
+    lastcupid=@cpuid.id
     #@cpuid=Cpuid.where(cpuid:params[:cpuid])
     licensevalue=''
       licensenumber=params[:licensenum]
-      licensetime=params[:licensetime].to_s.delete('-')
+      licensetime=params[:licensetime]
 
 
-    licensestr=params[:cpuid].to_s.upcase+':'+licensenumber+':'+licensetime+':CLOUDTIMESOFT'
-
+    licensestr=params[:cpuid].to_s.upcase+':'+licensenumber+':'+DateTime.parse(licensetime).strftime("%Y%m%d")  +':CLOUDTIMESOFT'
+#debugger
     @temlicense=::Digest::MD5.hexdigest(licensestr)#bfebfbff000306c3
     license=@temlicense.to_s[8,16]
     license.to_s.upcase!
@@ -59,12 +62,14 @@ class CreatelicensesController < ApplicationController
     license.insert(8,'-')
     license.insert(4,'-')
 
-    @licenses=License.where(license:license)
-    if @licenses == nil
-      License.create(cpuid_id:lastcpuid.id,license:license,licensenum:params[:licensenum],licensetime:params[:licensetime])
+    @licenses=License.find_by(license:license)
+    #debugger
+    if @licenses==nil
+      #debugger
+      License.create(cpuid_id:lastcupid,license:license,licensenum:params[:licensenum],licensetime:params[:licensetime])
     end
 
-
+#debugger
 
 license='[{"license"'+':"' +license+'"}]'
     render json:(license)
