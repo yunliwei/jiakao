@@ -15,6 +15,7 @@ class ErrquestsController < ApplicationController
   def errcount
     @questions= Question.all
     errs=Errquest.all
+
     @errcounts=Array.new
     errs.each do |err|
       flag = false
