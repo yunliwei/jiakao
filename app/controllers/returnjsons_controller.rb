@@ -31,11 +31,9 @@ class ReturnjsonsController < ApplicationController
     if myuser
       myuser.remoteval=myuuid
       myuser.save
-      if myuser.logintype=='0'
-      render json:('[{"validate":"'+myuuid+'","value":"'+myuser.loginnumber.to_s+'","status":"'+myuser.status+'"}]')
-      else
-        render json:('[{"validate":"'+myuuid+'","value":"'+myuser.logintime.to_s+'","status":"'+myuser.status+'"}]')
-        end
+
+        render json:('[{"number":"'+myuser.loginnumber.to_s+'",""validate":"'+myuuid+'","time":"'+myuser.logintime.to_s+'","status":"'+myuser.status+'"}]')
+
     end
   end
 
