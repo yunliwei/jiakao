@@ -32,7 +32,7 @@ class ReturnjsonsController < ApplicationController
       myuser.remoteval=myuuid
       myuser.save
 
-        render json:('[{"number":"'+myuser.loginnumber.to_s+'",""validate":"'+myuuid+'","time":"'+myuser.logintime.to_s+'","status":"'+myuser.status+'"}]')
+        render json:('[{"number":"'+myuser.loginnumber.to_s+'","validate":"'+myuuid+'","time":"'+myuser.logintime.to_s+'","status":"'+myuser.status+'"}]')
 
     end
   end
