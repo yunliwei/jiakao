@@ -149,14 +149,37 @@ class ReturnjsonsController < ApplicationController
   end
 
   def del_errquests
-    questions=params[:q]
+    #questions=params[:q]
+   # debuggerqu
+    amount=params[:amount]
     userid=params[:user_id]
-    if questions != nil
-      delerr = Errquest.where("user_id="+userid+"and id in("+questions+")" )
-      delerr.each do |del|
+    if amount.to_s.include?'3'
+    errquestion = User.find(userid).errquests.where(:amount=>3)
+    end
+    if(errquestion!=nil)
+      errquestion.each do |del|
         del.destroy
       end
     end
+    if amount.to_s.include?'2'
+      errquestion = User.find(userid).errquests.where(2)
+    end
+    if(errquestion!=nil)
+      errquestion.each do |del|
+        del.destroy
+      end
+    end
+    if amount.to_s.include?'1'
+      errquestion = User.find(userid).errquests.where(1)
+    end
+    if(errquestion!=nil)
+      errquestion.each do |del|
+        del.destroy
+      end
+    end
+
+    render json:('[{"status":"0"}]')
+
   end
 
   def reguser
@@ -172,17 +195,17 @@ class ReturnjsonsController < ApplicationController
 
     loginuser=User.find_by(login:login)
     if loginuser != nil
-      render render json:('[{"status":"0"}]')#账号已存在
+       render json:('[{"status":"0"}]')#账号已存在
     end
 
     phoneuser=User.find_by(phonenumber:phone)
     if phoneuser != nil
-      render render json:('[{"status":"1"}]')#手机号码已存在
+       render json:('[{"status":"1"}]')#手机号码已存在
     end
 
     if loginuser == nil && phoneuser == nil
       User.create(login:login,password:password,studentid:studentid,sex:sex,idcard:idcard,name:name,money:money,education:education,phonenumber:phone,status:'3')
-      render render json:('[{"status":"2"}]')#注册成功
+       render json:('[{"status":"2"}]')#注册成功
     end
 
   end
@@ -202,7 +225,7 @@ def getip(ip)
     req.url '/apistore/iplookup/iplookup_paid'
   end
   return request.body
-  debugger
+  #debugger
 end
 
 

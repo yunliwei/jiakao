@@ -59,11 +59,17 @@
               </td>
               <td>
 
-              <% if user.status == '0'%>
-                  停用
-              <% else %>
-                  正常
-              <% end %>
+                <% if user.status == '0'%>
+                    停用
+                <% elsif user.status =='1' %>
+                    正常
+                <% else %>
+                    未审核
+                <% end %>
+
+
+
+
               </td>
               <td>
                 <%= link_to '', edit_user_path(user),class:'fa fa-edit','data-no-turbolink'=>true %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
