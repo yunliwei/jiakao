@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :answers do
     collection do
       get 'changeanswer'
+      get 'createanswer'
     end
   end
   resources :progres

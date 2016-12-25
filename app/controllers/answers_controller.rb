@@ -75,6 +75,11 @@ answer = Answer.find(params[:change])
     answer.save
   end
 
+  def createanswer
+    Answer.create(question_id:params[:questionid],asnwer:params[:answer],isright:params[:isright])
+    render json:('[{"status":"0"}]')
+  end
+
 
 
 

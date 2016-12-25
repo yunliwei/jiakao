@@ -58,7 +58,7 @@ if($('#typevalue').val()=="")
 
     if($('#statusvalue').val()=='')
     {
-        $('#statusvalue').val('1');
+        $('#statusvalue').val('3');
     }
 
     $('#selectstatus').change(function(){
@@ -146,6 +146,7 @@ if($('#typevalue').val()=="")
       <select class="form-control m-b" id="selectstatus">
         <option value="1">正常</option>
         <option  value="0">停用</option>
+        <option  value="3">待审核</option>
       </select>
       <input  id="statusvalue" type='hidden'>
 

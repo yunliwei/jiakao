@@ -173,6 +173,8 @@ if(!(recpt && resub))
 
 
 
+
+
         $('#XZ').on('ifChecked',function(event){
             $('#PD').iCheck('uncheck');
             $('#xzdiv').removeClass('hiddenerr');
@@ -372,6 +374,10 @@ $('#img1').attr('src',$('#questionimageurl').val());
 
 
 
+
+
+
+
     });
 
 
@@ -390,6 +396,37 @@ $('#img1').attr('src',$('#questionimageurl').val());
         }
     }
 
+
+
+    //window.attachEvent("onload", setfile);
+    //var WshShell=new ActiveXObject("WScript.Shell");
+    function setfile(msg){
+        document.getElementById('imgupload').setAttribute('value',msg);
+        //setTimeout('document.all.question[questionimage].focus();WshShell.sendKeys("C:/java/sdfs/11/11.jpg");',20);
+    }
+
+
+
+    function createanswer(){
+        $.ajax({
+            type: 'get',
+            url: '192.168.1.98:3000/answers/createanswer?questionid='+$('#quesid').val()+'&answer='+$('#an1').val()+'&isright='+$('#anv1').val()
+        });
+        $.ajax({
+            type: 'get',
+            url: '/answers/createanswer?questionid='+$('#quesid').val()+'&answer='+$('#an2').val()+'&isright='+$('#anv2').val()
+        });
+        $.ajax({
+            type: 'get',
+            url: '/answers/createanswer?questionid='+$('#quesid').val()+'&answer='+$('#an3').val()+'&isright='+$('#anv3').val()
+        });
+        $.ajax({
+            type: 'get',
+            url: '/answers/createanswer?questionid='+$('#quesid').val()+'&answer='+$('#an4').val()+'&isright='+$('#anv4').val()
+        });
+
+    }
+
 </script>
 
 
@@ -401,8 +438,14 @@ $('#img1').attr('src',$('#questionimageurl').val());
         display: none;
     }
 </style>
-
-
+<input type="hidden" id="an1" >
+<input type="hidden" id="anv1">
+<input type="hidden" id="an2">
+<input type="hidden" id="anv2">
+<input type="hidden" id="an3">
+<input type="hidden" id="anv3">
+<input type="hidden" id="an4">
+<input type="hidden" id="anv4">
 <div class="ibox-content form-horizontal m-t" style="height: 1000px;">
   <div class="col-md-8">
 
@@ -414,6 +457,7 @@ $('#img1').attr('src',$('#questionimageurl').val());
 
 
     <%= form_for(@question,:html => {:class=>'form-horizontal m-t',:multipart => true}) do |f| %>
+        <%= f.hidden_field :id,id:'quesid' %>
         <div class="form-group">
           <label class="col-sm-2 control-label">题目内容：</label>
           <div class="col-sm-9">
@@ -423,7 +467,7 @@ $('#img1').attr('src',$('#questionimageurl').val());
         <div class="form-group">
           <label class="col-sm-2 control-label">图片：</label>
           <div class="col-sm-9">
-            <%= f.file_field :questionimage,class:'form-control',:onchange => "readURL(this)" %>
+            <%= f.file_field :questionimage,id:'imgupload',class:'form-control',:onchange => "readURL(this)" %>
           </div>
         </div>
 

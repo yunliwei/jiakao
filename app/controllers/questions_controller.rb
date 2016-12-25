@@ -55,6 +55,7 @@ class QuestionsController < ApplicationController
   def update
     set_updatecheck
     respond_to do |format|
+      #debugger
       if @question.update(question_params)
         format.html { redirect_to questions_path, notice: 'Question was successfully updated.' }
         format.json { render :show, status: :ok, location: @question }
