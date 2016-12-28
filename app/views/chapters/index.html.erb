@@ -19,7 +19,7 @@
 
         <% @chapters.each do |chapter| %>
             <tr>
-              <td><%= chapter.chapter %></td>
+              <td>(<%= chapter.flag %>)<%= chapter.chapter %></td>
 <td>
                 <%= link_to '', edit_chapter_path(chapter),class:'fa fa-edit' %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <%= link_to '', chapter,class:'fa fa-trash', method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -15,9 +15,8 @@
             {
                 ischeck=ischeck.substring(0,ischeck.length-1);
             }
-            //alert(ischeck);
-            //return false;
-            $('#driverlicensetype').val(ischeck);
+
+            //$('#driverlicensetype').val(ischeck);
 
 
 
@@ -32,9 +31,8 @@
             {
                 tixingcheck=tixingcheck.substring(0,tixingcheck.length-1);
             }
-            //alert(ischeck);
-            //return false;
-            $('#questiontype').val(tixingcheck);
+
+            //$('#questiontype').val(tixingcheck);
 
 
 
@@ -438,14 +436,7 @@ $('#img1').attr('src',$('#questionimageurl').val());
         display: none;
     }
 </style>
-<input type="hidden" id="an1" >
-<input type="hidden" id="anv1">
-<input type="hidden" id="an2">
-<input type="hidden" id="anv2">
-<input type="hidden" id="an3">
-<input type="hidden" id="anv3">
-<input type="hidden" id="an4">
-<input type="hidden" id="anv4">
+
 <div class="ibox-content form-horizontal m-t" style="height: 1000px;">
   <div class="col-md-8">
 
@@ -515,7 +506,7 @@ $('#img1').attr('src',$('#questionimageurl').val());
               <option value="0">选择章节</option>
               <% @chapters.each do |chapter| %>
                   <option value=<%= chapter.id %>>
-                    <%= chapter.chapter %>
+                    (<%= chapter.flag %>)<%= chapter.chapter %>
                   </option>
               <% end %>
             </select>
@@ -711,6 +702,19 @@ $('#img1').attr('src',$('#questionimageurl').val());
         <div class="form-group">
           <label class="col-sm-2 control-label"></label>
           <div class="col-sm-9">
+
+
+
+            <%= hidden_field :an1,params[:an1],id:'an1' %>
+            <%= hidden_field :anv1,params[:anv1],id:'anv1' %>
+            <%= hidden_field :an2,params[:an2],id:'an2' %>
+            <%= hidden_field :anv2,params[:anv2],id:'anv2' %>
+            <%= hidden_field :an3,params[:an3],id:'an3' %>
+            <%= hidden_field :anv3,params[:anv3],id:'anv3' %>
+            <%= hidden_field :an4,params[:an4],id:'an4' %>
+            <%= hidden_field :anv4,params[:anv4],id:'anv4' %>
+
+
             <%= f.submit '确定',class: "btn btn-w-m btn-primary mylink pull-right",id:'smt','data-no-turbolink'=>true %>
           </div>
         </div>

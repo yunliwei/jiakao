@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Chapter:</strong>
-  <%= @chapter.chapter %>
+  <strong>章节:</strong>
+  <%= @chapter.chapter %>(<%= @chapter.flag %>)
 </p>
 
 <%= link_to 'Edit', edit_chapter_path(@chapter) %> |
