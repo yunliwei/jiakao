@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  chapter_id: 1
+  subject: 1
+  classflag: MyString
+  questiontype: MyString
+  name: MyString
+
+two:
+  chapter_id: 1
+  subject: 1
+  classflag: MyString
+  questiontype: MyString
+  name: MyString

@@ -55,6 +55,11 @@ Rails.application.routes.draw do
 resources :cpuids
   resources :licenses
   resources :loginlogs
+  resources :clas do
+    collection do
+      get 'validateflag'
+    end
+  end
 
 
   # The priority is based upon order of creation: first created -> highest priority.

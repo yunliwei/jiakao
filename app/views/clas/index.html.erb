@@ -1,0 +1,66 @@
+
+
+<%= render 'layerbegin' %>
+<div class="col-lg-12">
+  <div class="ibox float-e-margins">
+    <div class="ibox-title">
+      <h3>强化分类</h3>
+
+    </div>
+    <div class="ibox-content">
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+        <tr>
+          <th class="text-center">车型</th>
+          <th class="text-center">科目</th>
+          <th class="text-center">分类标识</th>
+          <th class="text-center">分类名称</th>
+          <th class="text-center">题型</th>
+          <th class="text-center">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        <% @clas.each do |cla| %>
+            <tr>
+              <td>
+                <%= cla.cartype %>
+              </td>
+              <td>
+                <% @subjects.each do|subject|%>
+                    <% if cla.subject_id == subject.id %>
+                        <%= subject.subject %>
+                        <% break %>
+                    <% end %>
+                <% end %>
+              </td>
+              <td>
+                <%= cla.classflag%>
+              </td>
+              <td>
+                <%= cla.name%>
+              </td>
+              <td>
+                <%= cla.questiontype %>
+              </td>
+<td>
+                <%= link_to '', edit_cla_path(cla),class:'fa fa-edit' %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <%= link_to '', cla,class:'fa fa-trash', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <div class="text-center" >
+
+        <%= will_paginate @clas, previous_label:'上一页', next_label: '下一页' %>
+      </div>
+
+
+      <%= link_to "新增", new_cla_path,class: "btn btn-w-m btn-success mylink pull-right" %>
+      <br>
+    </div>
+
+  </div>
+</div>
+<%= render 'layerend' %>

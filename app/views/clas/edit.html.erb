@@ -1,0 +1,40 @@
+<%= render 'layerbegin' %>
+<div class="ibox-content form-horizontal m-t">
+  <h3>新增章节</h3>
+
+
+
+  <%= form_for(@chapter,:html => {:class=>'form-horizontal m-t',:multipart => true}) do |f| %>
+      <br>
+      <br>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">章节名称：</label>
+        <div class="col-sm-9">
+          <%= f.text_field :chapter ,class:"form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">车型：</label>
+        <div class="col-sm-9">
+          <%= f.text_field :flag ,class:"form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-9">
+          <%= f.submit '确定',class: "btn btn-w-m btn-primary mylink pull-right",id:'smt','data-no-turbolink'=>true %>
+        </div>
+      </div>
+
+
+
+
+  <% end %>
+
+</div>
+
+
+<%= render 'layerend' %>
