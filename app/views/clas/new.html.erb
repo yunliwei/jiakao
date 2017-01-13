@@ -5,18 +5,24 @@
             radioClass: 'iradio_square-green'
         });
 
-$('#classflag').blur(function(){
-    $.ajax({
-        type:"get",
-        url:"validateflag",
-        data:data,
-        success:function(html) {
-            $('.result').show();
-            $('.result').text(html);
-        }
-    });
-    return false;
-});
+        $('#classflag').blur(function(){
+            $.ajax({
+                type:"get",
+                url:"validateflag",
+                data:data,
+                success:function(data) {
+                    $(data).each(
+                            function(index,item){
+                                if(item.status==0)
+                                {
+
+                                }
+                            });
+                }
+
+            });
+            return false;
+        });
 
 
 
@@ -24,7 +30,11 @@ $('#classflag').blur(function(){
     });
 </script>
 <%= render 'layerbegin' %>
+
 <div class="ibox-content form-horizontal m-t">
+  <div class="alert alert-danger text-center">
+    H+是一个很棒的后台UI框架 <a class="alert-link" href="notifications.html#">了解更多</a>.
+  </div>
   <h3>新增分类</h3>
 
 
