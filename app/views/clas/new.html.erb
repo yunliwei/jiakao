@@ -5,23 +5,115 @@
             radioClass: 'iradio_square-green'
         });
 
-        $('#classflag').blur(function(){
+        $('#classflag').change(function(){
             $.ajax({
                 type:"get",
-                url:"validateflag",
-                data:data,
+                url:"/clas/validateflag?classflag="+$('#classflag').val(),
+                datatype:'json',
                 success:function(data) {
-                    $(data).each(
-                            function(index,item){
-                                if(item.status==0)
-                                {
-
-                                }
-                            });
+                    if($('#classflag').val()=='')
+                    {
+                        $('.alert').html('标识不能为空！');
+                        $('.alert').addClass('showerr');
+                        $('.alert').removeClass('hiddenerr');
+                        return false;
+                    }
+                    else {
+                        $(data).each(
+                                function (index, item) {
+                                    if (item.status == 0) {
+                                        $('.alert').addClass('showerr');
+                                        $('.alert').removeClass('hiddenerr');
+                                        $('.alert').html('标识已存在，请重新输入！');
+                                        return false;
+                                    }else
+                                    {
+                                        $('.alert').addClass('hiddenerr');
+                                        $('.alert').removeClass('showerr');
+                                    }
+                                });
+                    }
                 }
 
             });
-            return false;
+
+        });
+
+
+
+
+        $('#smt').click(function(){
+            var cartype='';
+            if($('#C1').is(':checked')){
+                cartype+='C1:';
+            }
+            if($('#C2').is(':checked')){
+                cartype+='C2:';
+            }
+            if($('#C3').is(':checked')){
+                cartype+='C3:';
+            }
+            if($('#C4').is(':checked')){
+                cartype+='C4:';
+            }
+            if($('#A1').is(':checked')){
+                cartype+='A1:';
+            }
+            if($('#A3').is(':checked')){
+                cartype+='A3:';
+            }
+            if($('#B1').is(':checked')){
+                cartype+='B1:';
+            }
+            if($('#A2').is(':checked')){
+                cartype+='A2:';
+            }
+            if($('#B2').is(':checked')){
+                cartype+='B2:';
+            }
+            if($('#D').is(':checked')){
+                cartype+='D:';
+            }
+            if($('#E').is(':checked')){
+                cartype+='E:';
+            }
+            if($('#F').is(':checked')){
+                cartype+='F:';
+            }
+            if($('#HF').is(':checked')){
+                cartype+='HF:';
+            }
+
+            if(cartype.length>0)
+            {
+
+                cartype=cartype.substring(0,cartype.length-1);
+                $('#cartype').val(cartype);
+            }
+
+            if($('#subject_id').val()=='')
+            {
+                $('.alert').addClass('showerr');
+                $('.alert').removeClass('hiddenerr');
+                $('.alert').html('请选择科目');
+                return false;
+            }
+
+            if($('#classflag').val()=='')
+            {
+                $('.alert').addClass('showerr');
+                $('.alert').removeClass('hiddenerr');
+                $('.alert').html('标识不能为空');
+                return false;
+            }
+
+        });
+
+
+
+        $('#subjectid').change(function(){
+
+           $('#subject_id').val($('#subjectid').val());
         });
 
 
@@ -29,11 +121,24 @@
 
     });
 </script>
+
+
+<style type="text/css">
+    .showerr{
+        display: block;
+    }
+    .hiddenerr{
+        display: none;
+    }
+</style>
+
 <%= render 'layerbegin' %>
 
+
+
 <div class="ibox-content form-horizontal m-t">
-  <div class="alert alert-danger text-center">
-    H+是一个很棒的后台UI框架 <a class="alert-link" href="notifications.html#">了解更多</a>.
+  <div class="alert alert-danger text-center hiddenerr">
+    分类标识重复，请重新输入
   </div>
   <h3>新增分类</h3>
 
@@ -148,17 +253,19 @@
       </div>
 
 
+          <%= f.hidden_field :cartype ,class:"form-control",id:'cartype' %>
+
 
         <div class="form-group">
           <label class="col-sm-2 control-label">科目名称：</label>
           <div class="col-sm-9">
-            <%= f.hidden_field :subject_id ,class:"form-control" %>
-            <select class="form-control m-b" id="chapter">
+            <%= f.hidden_field :subject_id ,class:"form-control", id:'subject_id' %>
+            <select class="form-control m-b" id="subjectid">
 
-              <option value="0">选择章节</option>
-              <% @chapters.each do |chapter| %>
-                  <option value=<%= chapter.id %>>
-                    (<%= chapter.flag %>)<%= chapter.chapter %>
+              <option value="0">选择科目</option>
+              <% @subjects.each do |subject| %>
+                  <option value=<%= subject.id %>>
+                    <%= subject.subject %>
                   </option>
               <% end %>
             </select>
@@ -172,10 +279,24 @@
         </div>
       </div>
 
+      <div class="form-group">
+        <label class="col-sm-2 control-label">分类名称：</label>
+        <div class="col-sm-9">
+          <%= f.text_field :name ,class:"form-control",id:'classflag' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">题型：</label>
+        <div class="col-sm-9">
+          <%= f.text_field :questiontype ,class:"form-control",id:'classflag' %>
+        </div>
+      </div>
+
         <div class="form-group">
           <label class="col-sm-2 control-label"></label>
           <div class="col-sm-9">
-            <%= f.submit '确定',class: "btn btn-w-m btn-primary mylink pull-right",id:'smt','data-no-turbolink'=>true %>
+            <%= f.submit '确定',class: "btn btn-w-m btn-success mylink pull-right",id:'smt','data-no-turbolink'=>true %>
           </div>
         </div>
 

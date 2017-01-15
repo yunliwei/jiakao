@@ -1,0 +1,125 @@
+<script>
+  $(document).ready(function(){
+      $('.i-checks').iCheck({
+          checkboxClass: 'icheckbox_square-green',
+          radioClass: 'iradio_square-green'
+      });
+
+      function getUrlParam(name) {
+          var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+          var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+          if (r != null) return unescape(r[2]); return null; //返回参数值
+      }
+
+      $('#addquestion').click(function(){
+          var questions = new Array();
+          $('.ischeck').each(function(){
+
+              if($(this).is(':checked')){
+                  questions.push($(this).val());
+              }
+          }) ;
+          //alert(questions);
+          //var xx = getUrlParam('reurl');
+          $.ajax({
+              type:"get",
+              url:"/questions/addin?claid="+getUrlParam('claid')+'&questionid='+questions,
+              datatype:'json',
+              success:function(data) {
+                  window.parent.location.reload();
+              }
+
+          });
+
+
+
+      });
+  });
+</script>
+<% style_session('que') %>
+
+
+<div class="col-lg-12">
+  <div class="ibox float-e-margins">
+    <div class="ibox-title">
+      <h3>题目<br>
+      </h3>
+    </div>
+    <div class="ibox-content">
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+        <tr>
+          <th class="text-center">操作</th>
+          <th class="text-center">题目名称</th>
+          <th class="text-center">题型</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <% @questions.each do |question| %>
+            <tr>
+              <td>
+                <div class="icheckbox i-checks">
+                  <label>
+                    <% isselect=0 %>
+                    <% @cladetails.each do|f| %>
+
+                        <% if f.question_id.to_s == question.id.to_s %>
+                            <% isselect = isselect + 1 %>
+                            <% break %>
+                        <% end %>
+                    <% end %>
+                    <% if isselect>0 %>
+                        <input type="checkbox" value=<%= question.id %> class="ischeck" checked> <i></i></label>
+                    <% else %>
+                        <input type="checkbox" value=<%= question.id %> class="ischeck"> <i></i></label>
+                    <% end %>
+                    </div>
+              </td>
+              <td style="max-width:300px;">
+                <%= question.questionname %>
+              </td>
+
+
+              <td>
+                <span style="color: dodgerblue">[&nbsp;
+                  <% if question.questiontype.to_s.include?'XD' %>
+                  对
+                      <% end %>
+                  <% if question.questiontype.to_s.include?'XC' %>
+                  错
+                      <% end %>
+                  <% if question.questiontype.to_s.include?'TP' %>
+                  图
+                      <% end %>
+                  <% if question.questiontype.to_s.include?'FTP' %>
+                  非图
+                      <% end %>
+                  <% if question.questiontype.to_s.include?'SS' %>
+                  手
+                      <% end %>
+                  <% if question.questiontype.to_s.include?'QJ' %>
+                  情
+                      <% end %>
+                  <% if question.questiontype.to_s.include?'BZ' %>
+                  标
+                      <% end %>
+
+                  ]</span>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <input type="button" class="btn btn-w-m btn-primary mylink pull-right" value="确定" id="addquestion" />
+
+
+      <br>
+
+
+      <br>
+    </div>
+  </div>
+
+</div>

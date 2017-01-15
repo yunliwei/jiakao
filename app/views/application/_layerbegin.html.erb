@@ -51,6 +51,24 @@
 
           </ul>
         </li>
+        <% if session[:stylesession]=="cla" %>
+            <li class="active">
+        <%else %>
+            <li>
+        <%end %>
+
+          <a href="">
+            <i class="fa fa-bars"></i>
+            <span class="nav-label">题型分类</span>
+            <span class="fa arrow"></span>
+          </a>
+          <ul class="nav nav-second-level">
+            <li>
+
+              <%= link_to '题型分类',clas_path ,'data-no-turbolink'=>true%>
+            </li>
+          </ul>
+        </li>
 
 
 

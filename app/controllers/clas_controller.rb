@@ -19,21 +19,22 @@ class ClasController < ApplicationController
   # GET /chapters/new
   def new
     @cla = Cla.new
-    @chapters=Chapter.all
+    @subjects=Subject.all
   end
 
   # GET /chapters/1/edit
   def edit
-
+    @subjects=Subject.all
   end
 
   # POST /chapters
   # POST /chapters.json
   def create
+    set_updatecheck
     @cla = Cla.new(cla_params)
     respond_to do |format|
       if @cla.save
-        format.html { redirect_to clas_path, notice: 'cla was successfully created.' }
+        format.html { redirect_to edit_cla_path(@cla), notice: 'cla was successfully created.' }
         format.json { render :show, status: :created, location: @cla }
       else
         format.html { render :new }
@@ -45,6 +46,7 @@ class ClasController < ApplicationController
   # PATCH/PUT /chapters/1
   # PATCH/PUT /chapters/1.json
   def update
+    set_updatecheck
     respond_to do |format|
       if @cla.update(cla_params)
         format.html { redirect_to clas_path, notice: 'Cla was successfully updated.' }
@@ -59,6 +61,7 @@ class ClasController < ApplicationController
   # DELETE /chapters/1
   # DELETE /chapters/1.json
   def destroy
+    set_updatecheck
     @cla.destroy
     respond_to do |format|
       format.html { redirect_to clas_url, notice: 'Cla was successfully destroyed.' }
@@ -77,7 +80,7 @@ class ClasController < ApplicationController
 
   private
   # Use callbacks to share common setup or constraints between actions.
-  def set_chapter
+  def set_cla
     @cla = Cla.find(params[:id])
   end
 

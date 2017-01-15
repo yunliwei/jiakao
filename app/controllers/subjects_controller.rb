@@ -26,6 +26,7 @@ class SubjectsController < ApplicationController
   # POST /subjects
   # POST /subjects.json
   def create
+    set_updatecheck
     @subject = Subject.new(subject_params)
 
     respond_to do |format|
@@ -42,6 +43,7 @@ class SubjectsController < ApplicationController
   # PATCH/PUT /subjects/1
   # PATCH/PUT /subjects/1.json
   def update
+    set_updatecheck
     respond_to do |format|
       if @subject.update(subject_params)
         format.html { redirect_to subjects_path, notice: 'Subject was successfully updated.' }
@@ -56,6 +58,7 @@ class SubjectsController < ApplicationController
   # DELETE /subjects/1
   # DELETE /subjects/1.json
   def destroy
+    set_updatecheck
     @subject.destroy
     respond_to do |format|
       format.html { redirect_to subjects_url, notice: 'Subject was successfully destroyed.' }

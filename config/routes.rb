@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   resources :scores
   resources :questions do
     resources :answers
+    collection do
+      get 'addquestion'
+      get 'addin'
+    end
   end
   resources :answers do
     collection do
@@ -44,6 +48,8 @@ Rails.application.routes.draw do
       get 'r_errquests'
       get 'reguser'
       get 'del_errquests'
+      get 'cla'
+      get 'classdetail'
     end
   end
   resources :createlicenses do

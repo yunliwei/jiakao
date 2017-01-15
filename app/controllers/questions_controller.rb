@@ -84,6 +84,27 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def addquestion
+    @questions=Question.all
+    @cla=Cla.find(params[:claid])
+    @cladetails=@cla.classdetails
+    set_updatecheck
+  end
+
+  def addin
+    @cla=Cla.find(params[:claid])
+    @cladetails=@cla.classdetails
+    @cladetails.each do|del|
+      del.destroy
+    end
+    questionid=params[:questionid].to_s.split(',')
+    questionid.each do |q|
+      @cladetails.create(question_id:q)
+    end
+    set_updatecheck
+    render json:('[{"status":"1"}]')
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_question

@@ -27,6 +27,7 @@ class ChaptersController < ApplicationController
   # POST /chapters
   # POST /chapters.json
   def create
+    set_updatecheck
     @chapter = Chapter.new(chapter_params)
     respond_to do |format|
       if @chapter.save
@@ -42,6 +43,7 @@ class ChaptersController < ApplicationController
   # PATCH/PUT /chapters/1
   # PATCH/PUT /chapters/1.json
   def update
+    set_updatecheck
     respond_to do |format|
       if @chapter.update(chapter_params)
         format.html { redirect_to chapters_path, notice: 'Chapter was successfully updated.' }
@@ -56,6 +58,7 @@ class ChaptersController < ApplicationController
   # DELETE /chapters/1
   # DELETE /chapters/1.json
   def destroy
+    set_updatecheck
     @chapter.destroy
     respond_to do |format|
       format.html { redirect_to chapters_url, notice: 'Chapter was successfully destroyed.' }

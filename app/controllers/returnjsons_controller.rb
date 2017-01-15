@@ -208,6 +208,16 @@ class ReturnjsonsController < ApplicationController
 
   end
 
+  def cla
+    @class=Cla.all
+    render json:@class
+  end
+
+  def classdetail
+    @classdetail=Classdetail.all
+    render json:@classdetail
+  end
+
 
 #url => 'http://apis.baidu.com'
 private
