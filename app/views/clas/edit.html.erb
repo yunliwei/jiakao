@@ -97,6 +97,20 @@
 
       });
 
+      $('.delquestion').click(function(){
+
+          $.ajax({
+              type:"get",
+              url:"/clas/delquestion?questionid="+$(this).val()+"&claid="+$('#claid').val(),
+              datatype:'json',
+              success:function(data) {
+                  window.location.reload();
+              }
+
+          });
+
+      });
+
 
 /////////////////////////////以下是加载
 if($('#cartype').val()!='')
@@ -342,7 +356,31 @@ if($('#cartype').val()!='')
 
   <input type="button" class="btn btn-w-m btn-primary mylink" value="编辑题" id="addquestion" />
 
+  <div class="ibox-content">
+    <table class="table table-hover table-bordered text-center">
+      <thead>
+      <tr>
+        <th class="text-center">题目名称</th>
+        <th class="text-center">删除</th>
 
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @questions.each do |question| %>
+          <tr>
+            <td>
+              <%= question.questionname %>
+            </td>
+            <td >
+              <button class="btn btn-success btn-sm delquestion" type="button" value=<%= question.id %> ><i class="fa fa-trash" style="margin: 0px;"></i>
+              </button>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
 
 
 </div>

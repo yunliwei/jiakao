@@ -85,7 +85,7 @@ class QuestionsController < ApplicationController
   end
 
   def addquestion
-    @questions=Question.all
+    @questions = Question.where(isnew:'0').all.order("updated_at DESC").paginate(page:params[:page],per_page:10)
     @cla=Cla.find(params[:claid])
     @cladetails=@cla.classdetails
     set_updatecheck
@@ -94,12 +94,15 @@ class QuestionsController < ApplicationController
   def addin
     @cla=Cla.find(params[:claid])
     @cladetails=@cla.classdetails
-    @cladetails.each do|del|
-      del.destroy
-    end
+    #@cladetails.each do|del|
+    #  del.destroy
+    #end
     questionid=params[:questionid].to_s.split(',')
     questionid.each do |q|
-      @cladetails.create(question_id:q)
+      temcladetails = Classdetail.where(['cla_id=? and question_id=?',params[:claid],q])
+      if temcladetails.count==0
+        @cladetails.create(question_id:q)
+      end
     end
     set_updatecheck
     render json:('[{"status":"1"}]')

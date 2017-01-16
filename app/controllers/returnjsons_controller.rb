@@ -208,9 +208,43 @@ class ReturnjsonsController < ApplicationController
 
   end
 
+
+  class Mycla
+    attr :id,true
+    attr :subject,true
+    attr :classflag,true
+    attr :questiontype,true
+    attr :name,true
+    attr :created_at,true
+    attr :updated_at,true
+    attr :cartype,true
+  end
+
+
   def cla
     @class=Cla.all
-    render json:@class
+    @subjects=Subject.all
+    arr =Array.new
+    @class.each do |cla|
+
+      @subjects.each do |subject|
+        if cla.subject_id==subject.id
+          cla.subject_id=subject.subject
+          mycla=Mycla.new
+          mycla.id=cla.id
+          mycla.subject=subject.subject
+          mycla.classflag=cla.classflag
+          mycla.questiontype=cla.questiontype
+          mycla.name=cla.name
+          mycla.created_at=cla.created_at
+          mycla.updated_at=cla.updated_at
+          mycla.cartype=cla.cartype
+          arr.push(mycla)
+          break
+        end
+      end
+    end
+    render json:arr
   end
 
   def classdetail

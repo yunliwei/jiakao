@@ -64,6 +64,7 @@ resources :cpuids
   resources :clas do
     collection do
       get 'validateflag'
+      get 'delquestion'
     end
   end
 

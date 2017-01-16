@@ -111,7 +111,9 @@
         <% end %>
         </tbody>
       </table>
-
+      <div class="text-center">
+        <%= will_paginate @questions, previous_label:'上一页', next_label: '下一页' %>
+      </div>
       <input type="button" class="btn btn-w-m btn-primary mylink pull-right" value="确定" id="addquestion" />
 
 

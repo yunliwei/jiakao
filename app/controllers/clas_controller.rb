@@ -25,6 +25,12 @@ class ClasController < ApplicationController
   # GET /chapters/1/edit
   def edit
     @subjects=Subject.all
+    @cladetails=@cla.classdetails
+    arr =  Array.new
+@cladetails.each do |cladetail|
+  arr.push(cladetail.question_id)
+end
+    @questions=Question.where(['id in(?)',arr])
   end
 
   # POST /chapters
@@ -76,6 +82,16 @@ class ClasController < ApplicationController
     else
       render json:('[{"status":"1"}]')
     end
+  end
+
+  def delquestion
+    @delclassdetail=Cla.find(params[:claid]).classdetails
+    @delclassdetail.each do |del|
+      if del.question_id.to_s==params[:questionid].to_s
+        del.destroy
+      end
+    end
+    render json:('[{"status":"1"}]')
   end
 
   private
