@@ -43,16 +43,14 @@ class ReturnjsonsController < ApplicationController
     loc=''
     location = getip(params[:ip])
     location_json = JSON.parse(location)
-    10.times do
+
       begin
-        loc = location_json['retData']['province']+'省 '+location_json['retData']['city']+'市 '+location_json['retData']['carrier']
+        loc = location_json['data']['region']+' '+location_json['data']['city']+' '+location_json['data']['county']+' '+location_json['data']['isp']
       rescue
         loc=''
       end
-      if loc != ''
-        break
-      end
-    end
+
+
 
 
     login=params[:login]
@@ -255,21 +253,34 @@ class ReturnjsonsController < ApplicationController
 
 #url => 'http://apis.baidu.com'
 private
+  # def getip(ip)
+  #   conn = Faraday.new(:url => 'http://apis.baidu.com') do |faraday|
+  #     faraday.request :url_encoded # form-encode POST params
+  #     faraday.response :logger # log requests to STDOUT
+  #     faraday.adapter Faraday.default_adapter # make requests with Net::HTTP
+  #   end
+  #   conn.headers[:apikey] = '6e1802f8c0cd1b42b32249ba42c2e602'
+  #   conn.params[:ip]=ip
+  #   request = conn.get do |req|
+  #     req.url '/apistore/iplookup/iplookup_paid'
+  #   end
+  #   return request.body
+  #   #debugger
+  # end
 def getip(ip)
-  conn = Faraday.new(:url => 'http://apis.baidu.com') do |faraday|
-    faraday.request  :url_encoded             # form-encode POST params
-    faraday.response :logger                  # log requests to STDOUT
-    faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
-  end
-  conn.headers[:apikey] = '6e1802f8c0cd1b42b32249ba42c2e602'
-  conn.params[:ip]=ip
-  request = conn.get do |req|
-    req.url '/apistore/iplookup/iplookup_paid'
-  end
-  return request.body
-  #debugger
+    conn = Faraday.new(:url => 'http://ip.taobao.com') do |faraday|
+      faraday.request :url_encoded # form-encode POST params
+      faraday.response :logger # log requests to STDOUT
+      faraday.adapter Faraday.default_adapter # make requests with Net::HTTP
+    end
+    # conn.headers[:apikey] = '6e1802f8c0cd1b42b32249ba42c2e602'
+    conn.params[:ip]=ip
+    request = conn.get do |req|
+      req.url '/service/getIpInfo.php'
+    end
+    return request.body
+    #debugger
 end
-
 
 
 
