@@ -10,7 +10,7 @@ class AvatersController < ApplicationController
 
     temavatar=Avater.all
     if temavatar.count==0
-      Avater.create(update_at:Datetime.now)
+      Avater.create(updated_at:Time.now)
     end
     @avater=Avater.first
     redirect_to edit_avater_path(@avater)
