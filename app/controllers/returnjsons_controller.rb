@@ -250,6 +250,19 @@ class ReturnjsonsController < ApplicationController
     render json:@classdetail
   end
 
+  class Myavatar
+    attr :topavatar,true
+    attr :leftavatar,true
+  end
+
+  def avatar
+    avatar=Avater.first
+    arr = Myavatar.new
+    arr.topavatar=avatar.topavater.url
+    arr.leftavatar=avatar.leftavater.url
+    render json:arr
+  end
+
 
 #url => 'http://apis.baidu.com'
 private

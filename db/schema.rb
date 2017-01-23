@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170113064930) do
+ActiveRecord::Schema.define(version: 20170123022244) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "adminname",       limit: 255
@@ -29,6 +29,19 @@ ActiveRecord::Schema.define(version: 20170113064930) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "question_id", limit: 4
+  end
+
+  create_table "avaters", force: :cascade do |t|
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "topavater_file_name",     limit: 255
+    t.string   "topavater_content_type",  limit: 255
+    t.integer  "topavater_file_size",     limit: 4
+    t.datetime "topavater_updated_at"
+    t.string   "leftavater_file_name",    limit: 255
+    t.string   "leftavater_content_type", limit: 255
+    t.integer  "leftavater_file_size",    limit: 4
+    t.datetime "leftavater_updated_at"
   end
 
   create_table "chapters", force: :cascade do |t|

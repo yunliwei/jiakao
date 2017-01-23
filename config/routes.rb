@@ -50,6 +50,7 @@ Rails.application.routes.draw do
       get 'del_errquests'
       get 'cla'
       get 'classdetail'
+      get 'avatar'
     end
   end
   resources :createlicenses do
@@ -67,6 +68,7 @@ resources :cpuids
       get 'delquestion'
     end
   end
+  resources :avaters
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -167,6 +167,23 @@
           </ul>
         </li>
 
+        <% if session[:stylesession]=='avatar' %>
+            <li class="active">
+        <% else %>
+            <li>
+        <% end %>
+
+        <a href=""><i class="fa fa-bullhorn"></i> <span class="nav-label">广告</span><span class="fa arrow"></span> </a>
+        <ul class="nav nav-second-level">
+          <li>
+            <%= link_to '广告',avaters_path ,'data-no-turbolink'=>true%>
+          </li>
+
+
+
+        </ul>
+        </li>
+
 
 
 
