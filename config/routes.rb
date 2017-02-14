@@ -51,6 +51,8 @@ Rails.application.routes.draw do
       get 'cla'
       get 'classdetail'
       get 'avatar'
+      get 'topavatar'
+      get 'leftavatar'
     end
   end
   resources :createlicenses do
@@ -69,6 +71,8 @@ resources :cpuids
     end
   end
   resources :avaters
+  resources :topavatars
+  resources :leftavatars
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,60 @@
+<script>
+    function readURLimg1(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#img1')
+                        .attr('src', e.target.result)
+                //.width(300)
+                //.height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+</script>
+
+<% style_session('avatar') %>
+<%= render 'layerbegin' %>
+<div class="ibox-content form-horizontal m-t">
+  <h3>广告</h3>
+
+
+
+  <%= form_for(@topavatar,:html => {:class=>'form-horizontal m-t',:multipart => true}) do |f| %>
+      <br>
+      <br>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">目录广告(180*720)：</label>
+        <div class="col-sm-4">
+          <%= f.file_field :topavatar ,class:"form-control" ,:onchange => "readURLimg1(this)" %>
+        </div>
+        <div>
+          <img id="img1" width="200" src=<%= @topavatar.topavatar.url %>>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">链接地址</label>
+        <div class="col-sm-4">
+          <%= f.text_field :link ,class:"form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-9">
+          <%= f.submit '确定',class: "btn btn-w-m btn-primary mylink pull-right",id:'smt','data-no-turbolink'=>true %>
+        </div>
+      </div>
+
+
+
+
+  <% end %>
+
+</div>
+
+
+<%= render 'layerend' %>

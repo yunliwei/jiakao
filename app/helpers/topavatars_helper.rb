@@ -1,0 +1,2 @@
+module TopavatarsHelper
+end

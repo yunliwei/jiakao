@@ -1,0 +1,2 @@
+module LeftavatarsHelper
+end

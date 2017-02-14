@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170123022244) do
+ActiveRecord::Schema.define(version: 20170212035606) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "adminname",       limit: 255
@@ -81,6 +81,16 @@ ActiveRecord::Schema.define(version: 20170123022244) do
     t.datetime "updated_at",            null: false
     t.integer  "user_id",     limit: 4
     t.integer  "question_id", limit: 4
+  end
+
+  create_table "leftavatars", force: :cascade do |t|
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "leftavatar_file_name",    limit: 255
+    t.string   "leftavatar_content_type", limit: 255
+    t.integer  "leftavatar_file_size",    limit: 4
+    t.datetime "leftavatar_updated_at"
+    t.string   "link",                    limit: 255
   end
 
   create_table "licenses", force: :cascade do |t|
@@ -177,6 +187,16 @@ ActiveRecord::Schema.define(version: 20170123022244) do
     t.string   "subject",    limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "topavatars", force: :cascade do |t|
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "topavatar_file_name",    limit: 255
+    t.string   "topavatar_content_type", limit: 255
+    t.integer  "topavatar_file_size",    limit: 4
+    t.datetime "topavatar_updated_at"
+    t.string   "link",                   limit: 255
   end
 
   create_table "updatechecks", force: :cascade do |t|

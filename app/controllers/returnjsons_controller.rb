@@ -251,8 +251,32 @@ class ReturnjsonsController < ApplicationController
   end
 
   class Myavatar
-    attr :topavatar,true
-    attr :leftavatar,true
+    attr :avatar,true
+    attr :link,true
+  end
+
+  def topavatar
+    @topavatars=Topavatar.all
+    avatars=Array.new
+    @topavatars.each do |topavatar|
+      arr=Myavatar.new
+      arr.avatar=topavatar.topavatar.url
+      arr.link=topavatar.link
+      avatars.push(arr)
+    end
+    render json:avatars
+  end
+
+  def leftavatar
+    @leftavatars=Leftavatar.all
+    avatars=Array.new
+    @leftavatars.each do |leftavatar|
+      arr=Myavatar.new
+      arr.avatar=leftavatar.leftavatar.url
+      arr.link=leftavatar.link
+      avatars.push(arr)
+    end
+    render json:avatars
   end
 
   def avatar
