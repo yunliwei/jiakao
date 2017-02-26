@@ -370,7 +370,7 @@ if($('#cartype').val()!='')
       <% @questions.each do |question| %>
           <tr>
             <td>
-              <%= question.questionname %>
+              <%= question.questionname.html_safe %>
             </td>
             <td >
               <button class="btn btn-success btn-sm delquestion" type="button" value=<%= question.id %> ><i class="fa fa-trash" style="margin: 0px;"></i>

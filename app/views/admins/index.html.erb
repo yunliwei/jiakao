@@ -13,7 +13,7 @@
         <tr>
           <th class="text-center">用户名</th>
           <th class="text-center">登陆名</th>
-          <th class="text-center">权限</th>
+
           <th class="text-center">状态</th>
           <th class="text-center">操作</th>
         </tr>
@@ -27,13 +27,7 @@
 
 
 
-              <td>
-                <% if admin.auth =='1'%>
-                    有权限
-                <% else %>
-                    无权限
-                <% end %>
-               </td>
+
               <td>
                <% if admin.status == 1 %>
                     正常

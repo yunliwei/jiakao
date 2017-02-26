@@ -21,7 +21,7 @@
         <% @questions.each do |question| %>
             <tr>
               <td style="max-width:300px;">
-                <%= question.questionname %>
+                <%= question.questionname.html_safe %>
               </td>
 
 
@@ -70,7 +70,7 @@
 
 
               <td>
-                <%= link_to '', edit_question_path(question),class:'fa fa-edit' %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <%= link_to '', edit_question_path(question),class:'fa fa-edit','data-no-turbolink'=>true %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <%= link_to '', question,class:'fa fa-trash', method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
         <% end %>

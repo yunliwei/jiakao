@@ -24,7 +24,7 @@
 
                 <% @questions.each do |question| %>
                     <% if question.id == err[:question]  %>
-                        <%= question.questionname %>
+                        <%= question.questionname.html_safe %>
                         <% break %>
                     <% end %>
                 <% end %>

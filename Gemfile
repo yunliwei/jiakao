@@ -5,6 +5,7 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'uuidtools'
 gem 'faraday'
+gem 'rails_kindeditor', github: 'Macrow/rails_kindeditor'
 #gem 'whenever',:require => false
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

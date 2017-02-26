@@ -1,5 +1,70 @@
 <%= render 'layerbegin' %>
 
+<script>
+    $(document).ready(function(){
+
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+
+        var elem = document.querySelector('.js-switch');
+        var init = new Switchery(elem);
+
+        var auth=$('#auth').val().split(':');
+        $(auth).each(function(i,item){
+            if(item=='question')
+            {
+                $('#question').iCheck('check');
+            }
+            if(item=='class')
+            {
+                $('#class').iCheck('check');
+            }
+            if(item=='admin')
+            {
+                $('#admin').iCheck('check');
+            }
+            if(item=='user')
+            {
+                $('#user').iCheck('check');
+            }
+            if(item=='record')
+            {
+                $('#record').iCheck('check');
+            }
+            if(item=='license')
+            {
+                $('#license').iCheck('check');
+            }
+            if(item=='error')
+            {
+                $('#error').iCheck('check');
+            }
+            if(item=='avatar')
+            {
+                $('#avatar').iCheck('check');
+            }
+        });
+
+if($('#status').val()=='1')
+{
+    //$('.js-switch').prop('checked', true);
+    //$('.js-switch').attr('checked');
+    elem.setPosition(true);
+    elem.handleOnchange(true);
+}else
+{
+    //$('.js-switch').prop('checked', false);
+    elem.setPosition(false);
+    elem.handleOnchange(false);
+    //$('.js-switch').attr('unchecked');
+}
+
+    });
+</script>
+
+
 <div class="ibox-content form-horizontal m-t">
 
   <div class="form-group">
@@ -13,7 +78,7 @@
         <div class="form-group">
           <label class="col-sm-5 control-label">用户名：</label>
           <div class="col-sm-3">
-            <%= f.text_field :login,class:"form-control" %>
+            <%= f.text_field :login,class:"form-control",readonly:"readonly" %>
           </div>
         </div>
 
@@ -29,16 +94,75 @@
             <%= f.password_field :password_confirmation,class:'form-control' %>
           </div>
         </div>
+
+            <%= f.hidden_field :auth,class:"form-control",id:'auth' %>
         <div class="form-group">
           <label class="col-sm-5 control-label">权限：</label>
           <div class="col-sm-3">
-            <%= f.text_field :auth,class:"form-control" %>
+            <div class="col-sm-12">
+              <table class="col-md-12">
+                <tr>
+                  <td>
+                    <div class="icheckbox i-checks">
+                      <label>
+                        <input type="checkbox" id="question" value="question" class="leixing"> <i></i> 题目</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="icheckbox i-checks">
+                      <label>
+                        <input type="checkbox" id="class" value="class" class="leixing"> <i></i>题型分类</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="icheckbox i-checks">
+                      <label>
+                        <input type="checkbox" id="admin" value="admin" class="leixing"> <i></i>管理员</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="icheckbox i-checks">
+                      <label>
+                        <input type="checkbox" id="user" value="user" class="leixing"> <i></i>用户</label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="icheckbox i-checks">
+                      <label>
+                        <input type="checkbox" id="record" value="record" class="leixing"> <i></i>用户记录</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="icheckbox i-checks">
+                      <label>
+                        <input type="checkbox" id="license" value="license" class="leixing"> <i></i>序列号</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="icheckbox i-checks">
+                      <label>
+                        <input type="checkbox" id="error" value="error" class="leixing"> <i></i>错题</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="icheckbox i-checks">
+                      <label>
+                        <input type="checkbox" id="avatar" value="avatar" class="leixing"> <i></i>广告</label>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
+
         <div class="form-group">
           <label class="col-sm-5 control-label">状态：</label>
           <div class="col-sm-3">
-            <%= f.text_field :status,class:"form-control" %>
+            <%= f.text_field :status,class:"form-control",id:'status' %>
+            <input type="checkbox" class="js-switch" checked />
           </div>
         </div>
         <%= f.submit '确定',class: "btn btn-w-m btn-success mylink pull-right",id:'smt','data-no-turbolink'=>true %>

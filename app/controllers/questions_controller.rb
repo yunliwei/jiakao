@@ -57,13 +57,13 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       #debugger
       if @question.update(question_params)
-        if @question.questiontype.to_s.include?('XZ')
-          answers=@question.answers
-          answers.create(asnwer:params[:an1][0],isright:params[:anv1][0])
-          answers.create(asnwer:params[:an2][0],isright:params[:anv2][0])
-          answers.create(asnwer:params[:an3][0],isright:params[:anv3][0])
-          answers.create(asnwer:params[:an4][0],isright:params[:anv4][0])
-        end
+        # if @question.questiontype.to_s.include?('XZ')
+        #   answers=@question.answers
+        #   answers.create(asnwer:params[:an1][0],isright:params[:anv1][0])
+        #   answers.create(asnwer:params[:an2][0],isright:params[:anv2][0])
+        #   answers.create(asnwer:params[:an3][0],isright:params[:anv3][0])
+        #   answers.create(asnwer:params[:an4][0],isright:params[:anv4][0])
+        # end
         format.html { redirect_to questions_path, notice: 'Question was successfully updated.' }
         format.json { render :show, status: :ok, location: @question }
       else
@@ -77,6 +77,12 @@ class QuestionsController < ApplicationController
   # DELETE /questions/1.json
   def destroy
     set_updatecheck
+    delcladeatail=Classdetail.where(question_id: @question.id.to_s)
+    delcladeatail.each do |del|
+      del.destroy
+    end
+
+    #delcladeatail.destroy
     @question.destroy
     respond_to do |format|
       format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }

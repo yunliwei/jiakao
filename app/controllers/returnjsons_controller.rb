@@ -1,4 +1,5 @@
 class ReturnjsonsController < ApplicationController
+  after_action :getip, only: [:getuser]
   def getquestion
     @questions = Question.where(isnew:'0')
     render json:(@questions)
@@ -41,14 +42,14 @@ class ReturnjsonsController < ApplicationController
 
 
     loc=''
-    location = getip(params[:ip])
-    location_json = JSON.parse(location)
-
-      begin
-        loc = location_json['data']['region']+' '+location_json['data']['city']+' '+location_json['data']['county']+' '+location_json['data']['isp']
-      rescue
-        loc=''
-      end
+    # location = getip(params[:ip])
+    # location_json = JSON.parse(location)
+    #
+    #   begin
+    #     loc = location_json['data']['region']+' '+location_json['data']['city']+' '+location_json['data']['county']+' '+location_json['data']['isp']
+    #   rescue
+    #     loc=''
+    #   end
 
 
 
@@ -304,7 +305,11 @@ private
   #   return request.body
   #   #debugger
   # end
-def getip(ip)
+def getip
+
+  loginlog=Loginlog.last
+  ip=loginlog.ip
+
     conn = Faraday.new(:url => 'http://ip.taobao.com') do |faraday|
       faraday.request :url_encoded # form-encode POST params
       faraday.response :logger # log requests to STDOUT
@@ -315,7 +320,21 @@ def getip(ip)
     request = conn.get do |req|
       req.url '/service/getIpInfo.php'
     end
-    return request.body
+    #return request.body
+
+#//////////////////////////////////////////////////////////
+    #location = getip(params[:ip])
+    location_json = JSON.parse(request.body)
+
+    begin
+      loc = location_json['data']['region']+' '+location_json['data']['city']+' '+location_json['data']['county']+' '+location_json['data']['isp']
+    rescue
+      loc=''
+    end
+  loginlog.location=loc
+  loginlog.save
+  #///////////////////////////////////////////////////////
+
     #debugger
 end
 

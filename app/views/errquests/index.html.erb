@@ -33,7 +33,7 @@
                 <td>
                   <% @questions.each do |question| %>
                       <% if question.id == errquest.question_id %>
-                          <%= question.questionname %>
+                          <%= question.questionname.html_safe %>
                           <% break %>
                       <% end %>
                   <% end %>
