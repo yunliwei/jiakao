@@ -24,168 +24,178 @@
             H+
           </div>
         </li>
-        <% if session[:stylesession]=='que' %>
-            <li class="active">
-        <% else %>
-            <li>
-        <% end %>
-          <a href="">
-            <i class="fa fa-file"></i>
+        <% if session[:auth].include?'question' %>
+            <% if session[:stylesession]=='que' %>
+                <li class="active">
+            <% else %>
+
+                <li>
+            <% end %>
+            <a href="">
+              <i class="fa fa-file"></i>
 
               <span class="nav-label">题目</span>
 
 
-            <span class="fa arrow"></span>
-          </a>
-          <ul class="nav nav-second-level">
-            <li>
+              <span class="fa arrow"></span>
+            </a>
+            <ul class="nav nav-second-level">
+              <li>
 
-              <%= link_to '题目',questions_path ,'data-no-turbolink'=>true%>
-            </li>
-            <li>
-              <%= link_to '章节',chapters_path ,'data-no-turbolink'=>true%>
-            </li>
-            <li>
-              <%= link_to '学科',subjects_path,'data-no-turbolink'=>true %>
-            </li>
+                <%= link_to '题目',questions_path ,'data-no-turbolink'=>true%>
+              </li>
+              <li>
+                <%= link_to '章节',chapters_path ,'data-no-turbolink'=>true%>
+              </li>
+              <li>
+                <%= link_to '学科',subjects_path,'data-no-turbolink'=>true %>
+              </li>
 
-          </ul>
+            </ul>
+        <% end %>
         </li>
-        <% if session[:stylesession]=="cla" %>
-            <li class="active">
-        <%else %>
-            <li>
-        <%end %>
+        <% if session[:auth].include?'class' %>
+            <% if session[:stylesession]=="cla" %>
+                <li class="active">
+            <%else %>
+                <li>
+            <%end %>
 
-          <a href="">
-            <i class="fa fa-bars"></i>
-            <span class="nav-label">题型分类</span>
-            <span class="fa arrow"></span>
-          </a>
-          <ul class="nav nav-second-level">
-            <li>
+            <a href="">
+              <i class="fa fa-bars"></i>
+              <span class="nav-label">题型分类</span>
+              <span class="fa arrow"></span>
+            </a>
+            <ul class="nav nav-second-level">
+              <li>
 
-              <%= link_to '题型分类',clas_path ,'data-no-turbolink'=>true%>
+                <%= link_to '题型分类',clas_path ,'data-no-turbolink'=>true%>
+              </li>
+            </ul>
             </li>
-          </ul>
-        </li>
-
-
-
-
-
-        <% if session[:stylesession]=='adm' %>
-            <li class="active">
-        <% else %>
-            <li>
         <% end %>
 
-        <a href="">
-          <i class="fa fa-user"></i>
 
-          <span class="nav-label">管理员</span>
 
-          <span class="fa arrow"></span>
-        </a>
-          <ul class="nav nav-second-level">
-            <li>
-              <%= link_to '管理员',admins_path ,'data-no-turbolink'=>true%>
+        <% if session[:auth].include?'admin' %>
+            <% if session[:stylesession]=='adm' %>
+                <li class="active">
+            <% else %>
+                <li>
+            <% end %>
+
+            <a href="">
+              <i class="fa fa-user"></i>
+
+              <span class="nav-label">管理员</span>
+
+              <span class="fa arrow"></span>
+            </a>
+            <ul class="nav nav-second-level">
+              <li>
+                <%= link_to '管理员',admins_path ,'data-no-turbolink'=>true%>
+              </li>
+            </ul>
             </li>
-          </ul>
-        </li>
-
-
-        <% if session[:stylesession]=='user' %>
-            <li class="active">
-        <% else %>
-            <li>
         <% end %>
 
-          <a href="">
-            <i class="fa fa-users"></i>
+        <% if session[:auth].include?'user' %>
+            <% if session[:stylesession]=='user' %>
+                <li class="active">
+            <% else %>
+                <li>
+            <% end %>
 
-            <span class="nav-label">用户</span>
-            <span class="fa arrow"></span>
-          </a>
-          <ul class="nav nav-second-level">
-            <li>
-              <%= link_to '用户',users_path ,'data-no-turbolink'=>true %>
+            <a href="">
+              <i class="fa fa-users"></i>
+
+              <span class="nav-label">用户</span>
+              <span class="fa arrow"></span>
+            </a>
+            <ul class="nav nav-second-level">
+              <li>
+                <%= link_to '用户',users_path ,'data-no-turbolink'=>true %>
+              </li>
+            </ul>
             </li>
-          </ul>
-        </li>
-
-
-
-        <% if session[:stylesession]=='log' %>
-            <li class="active">
-        <% else %>
-            <li>
         <% end %>
 
-          <a href=""><i class="fa fa-history"></i> <span class="nav-label">用户记录</span><span class="fa arrow"></span> </a>
-          <ul class="nav nav-second-level">
-            <li>
-              <%= link_to '用户记录',loginlogs_path ,'data-no-turbolink'=>true %>
+
+        <% if session[:auth].include?'record' %>
+            <% if session[:stylesession]=='log' %>
+                <li class="active">
+            <% else %>
+                <li>
+            <% end %>
+
+            <a href=""><i class="fa fa-history"></i> <span class="nav-label">用户记录</span><span class="fa arrow"></span> </a>
+            <ul class="nav nav-second-level">
+              <li>
+                <%= link_to '用户记录',loginlogs_path ,'data-no-turbolink'=>true %>
+              </li>
+            </ul>
             </li>
-          </ul>
-        </li>
-
-
-
-
-
-
-        <% if session[:stylesession]=='license' %>
-            <li class="active">
-        <% else %>
-            <li>
-        <% end %>
-          <a href=""><i class="fa fa-ils"></i> <span class="nav-label">序列号</span><span class="fa arrow"></span> </a>
-          <ul class="nav nav-second-level">
-            <li>
-              <%= link_to '序列号',createlicenses_path,'data-no-turbolink'=>true %>
-            </li>
-          </ul>
-        </li>
-
-        <% if session[:stylesession]=='err' %>
-            <li class="active">
-        <% else %>
-            <li>
         <% end %>
 
-          <a href=""><i class="fa fa-bug"></i> <span class="nav-label">错题</span><span class="fa arrow"></span> </a>
-          <ul class="nav nav-second-level">
-            <li>
-              <%= link_to '错题明细',errquests_path ,'data-no-turbolink'=>true%>
+
+
+
+        <% if session[:auth].include?'license' %>
+            <% if session[:stylesession]=='license' %>
+                <li class="active">
+            <% else %>
+                <li>
+            <% end %>
+            <a href=""><i class="fa fa-ils"></i> <span class="nav-label">序列号</span><span class="fa arrow"></span> </a>
+            <ul class="nav nav-second-level">
+              <li>
+                <%= link_to '序列号',createlicenses_path,'data-no-turbolink'=>true %>
+              </li>
+            </ul>
             </li>
-
-
-            <li>
-              <%= link_to '错题统计',errcount_errquests_path ,'data-no-turbolink'=>true%>
-            </li>
-          </ul>
-        </li>
-
-        <% if session[:stylesession]=='avatar' %>
-            <li class="active">
-        <% else %>
-            <li>
         <% end %>
 
-        <a href=""><i class="fa fa-bullhorn"></i> <span class="nav-label">广告</span><span class="fa arrow"></span> </a>
-        <ul class="nav nav-second-level">
-          <li>
-            <%= link_to '竖向广告',topavatars_path ,'data-no-turbolink'=>true%>
-          </li>
-          <li>
-            <%= link_to '横向广告',leftavatars_path ,'data-no-turbolink'=>true%>
-          </li>
+        <% if session[:auth].include?'error' %>
+            <% if session[:stylesession]=='err' %>
+                <li class="active">
+            <% else %>
+                <li>
+            <% end %>
+
+            <a href=""><i class="fa fa-bug"></i> <span class="nav-label">错题</span><span class="fa arrow"></span> </a>
+            <ul class="nav nav-second-level">
+              <li>
+                <%= link_to '错题明细',errquests_path ,'data-no-turbolink'=>true%>
+              </li>
 
 
-        </ul>
-        </li>
+              <li>
+                <%= link_to '错题统计',errcount_errquests_path ,'data-no-turbolink'=>true%>
+              </li>
+            </ul>
+            </li>
+        <% end %>
 
+        <% if session[:auth].include?'avatar' %>
+            <% if session[:stylesession]=='avatar' %>
+                <li class="active">
+            <% else %>
+                <li>
+            <% end %>
+
+            <a href=""><i class="fa fa-bullhorn"></i> <span class="nav-label">广告</span><span class="fa arrow"></span> </a>
+            <ul class="nav nav-second-level">
+              <li>
+                <%= link_to '竖向广告',topavatars_path ,'data-no-turbolink'=>true%>
+              </li>
+              <li>
+                <%= link_to '横向广告',leftavatars_path ,'data-no-turbolink'=>true%>
+              </li>
+
+
+            </ul>
+            </li>
+        <% end %>
 
 
 

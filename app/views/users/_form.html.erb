@@ -60,13 +60,16 @@
 
         if($('#statusvalue').val()=="")
         {
-            $('#statusvalue').val('0');
+            $('#statusvalue').val('1');
         }
 
-        $('#selectstatus').change(function(){
-            $('#statusvalue').val($(this).val());
-        })
-
+if($('#statusvalue').val()=='1'){
+    $('#selectstatus').val('1');
+}else if($('#statusvalue').val()=='0'){
+    $('#selectstatus').val('0');
+}else{
+    $('#selectstatus').val('3');
+}
 
 
 
@@ -150,7 +153,7 @@
               <option value="0">停用</option>
               <option value="3">未审核</option>
             </select>
-            <%= f.text_field :status,id:'statusvalue' ,type:'hidden'%>
+            <%= f.hidden_field :status,id:'statusvalue' %>
 
           </div>
         </div>

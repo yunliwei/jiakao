@@ -73,6 +73,7 @@ resources :cpuids
   resources :avaters
   resources :topavatars
   resources :leftavatars
+  resources :welcomes
 
 
   # The priority is based upon order of creation: first created -> highest priority.

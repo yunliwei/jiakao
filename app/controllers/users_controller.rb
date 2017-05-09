@@ -6,6 +6,12 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all.order("updated_at DESC").paginate(page:params[:page],per_page:10)
+if session[:auth].include?'all'
+  @users = User.all.order("updated_at DESC").paginate(page:params[:page],per_page:10)
+else
+  @users=User.where("admin_id=?",session[:id]).order("updated_at DESC").paginate(page:params[:page],per_page:10)
+end
+    @admins=Admin.all
     #require 'md5'
     @mycpu=::Digest::MD5.hexdigest('BFEBBFFF000306C4:20161201:1:CLOUDTIMESOFT')#bfebfbff000306c3
 
@@ -59,6 +65,7 @@ mypwdnum=params[:pwdnum]
     typenum=params[:typenum]
     typetime=params[:typetime]
     statusvalue=params[:statusvalue]
+    adminid=params[:adminid]
 
     step=0
     createsum=0
@@ -73,7 +80,7 @@ mypwdnum=params[:pwdnum]
 
         mypwd = randpassword(mypwdnum)
 
-        User.create(login:locallogin,password:mypwd,logintype:1,loginnumber:typenum,logintime:typetime,status:statusvalue)
+        User.create(login:locallogin,password:mypwd,logintype:1,loginnumber:typenum,logintime:typetime,status:statusvalue,admin_id:adminid)
 
 
 
@@ -149,7 +156,7 @@ mypwdnum=params[:pwdnum]
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:login, :password, :head, :studentid, :sex, :age, :idcard, :name, :money, :model, :Subject, :logintype, :loginnumber, :logintime, :status)
+      params.require(:user).permit(:login, :password, :head, :studentid, :sex, :age, :idcard, :name, :money, :model, :Subject, :logintype, :loginnumber, :logintime, :status, :admin_id)
     end
 
 

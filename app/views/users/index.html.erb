@@ -38,6 +38,7 @@
       <table class="table table-hover table-bordered text-center">
         <thead>
         <tr>
+          <th class="text-center">创建主体</th>
           <th class="text-center">帐号</th>
           <th class="text-center">密码</th>
           <th class="text-center">次数</th>
@@ -48,7 +49,15 @@
         </thead>
         <tbody>
         <% @users.each do |user| %>
-            <tr>
+                    <tr>
+                      <td>
+                        <% @admins.each do |admin| %>
+                        <% if user.admin_id == admin.id %>
+                            <%= admin.adminname %>
+                                <% break %>
+                            <% end %>
+                        <% end %>
+                      </td>
               <td><%= user.login%></td>
               <td><%= user.password %></td>
             <td>

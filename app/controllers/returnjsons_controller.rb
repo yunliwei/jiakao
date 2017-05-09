@@ -1,5 +1,5 @@
 class ReturnjsonsController < ApplicationController
-  after_action :getip, only: [:getuser]
+  #after_action :getip, only: [:getuser]
   def getquestion
     @questions = Question.where(isnew:'0')
     render json:(@questions)
@@ -81,6 +81,7 @@ class ReturnjsonsController < ApplicationController
     else
       render json:('[{"status":"error"}]')
     end
+    GetipJob.perform_later
 
   end
 

@@ -27,6 +27,8 @@ nowtime=Time.now - 86400
       if admin &&  admin.authenticate(params[:login][:password])
         session[:login]= admin.login
         session[:username] = admin.adminname
+        session[:auth] =  admin.auth
+        session[:id]=admin.id
         redirect_to admins_path
       else
         redirect_to action: 'index',id:0

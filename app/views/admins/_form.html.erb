@@ -45,21 +45,78 @@
             {
                 $('#avatar').iCheck('check');
             }
+            if(item=='all')
+            {
+                $('#all').iCheck('check');
+            }
         });
 
-if($('#status').val()=='1')
-{
-    //$('.js-switch').prop('checked', true);
-    //$('.js-switch').attr('checked');
-    elem.setPosition(true);
-    elem.handleOnchange(true);
-}else
-{
-    //$('.js-switch').prop('checked', false);
-    elem.setPosition(false);
-    elem.handleOnchange(false);
-    //$('.js-switch').attr('unchecked');
-}
+        if($('#status').val()=='1')
+        {
+            //$('.js-switch').prop('checked', true);
+            //$('.js-switch').attr('checked');
+            setSwitchery(init, true);
+
+        }else
+        {
+            //$('.js-switch').prop('checked', false);
+            setSwitchery(init, false);
+            //$('.js-switch').attr('unchecked');
+        }
+
+        function setSwitchery(switchElement, checkedBool) {
+            if((checkedBool && !switchElement.isChecked()) || (!checkedBool && switchElement.isChecked())) {
+                switchElement.setPosition(true);
+                switchElement.handleOnchange(true);
+            }
+        }
+
+        $('#smt').click(function(){
+           if (elem.checked){
+               $('#status').val(1);
+           }else
+           {
+               $('#status').val(0);
+           }
+var auth='';
+            if($('#question').is(':checked')){
+         auth+='question:';
+            }
+            if($('#class').is(':checked')){
+                auth+='class:';
+            }
+            if($('#admin').is(':checked')){
+                auth+='admin:';
+            }
+            if($('#user').is(':checked')){
+                auth+='user:';
+            }
+            if($('#record').is(':checked')){
+                auth+='record:';
+            }
+            if($('#license').is(':checked')){
+                auth+='license:';
+            }
+            if($('#error').is(':checked')){
+                auth+='error:';
+            }
+            if($('#avatar').is(':checked')){
+                auth+='avatar:';
+            }
+            if($('#all').is(':checked')){
+                auth+='all:';
+            }
+
+            if(auth.length>0){
+                $('#auth').val(auth.substring(0,auth.length-1));
+            }else{
+                $('#auth').val('');
+            }
+
+            //alert(elem.checked);
+            //return false;
+
+        });
 
     });
 </script>
@@ -95,7 +152,7 @@ if($('#status').val()=='1')
           </div>
         </div>
 
-            <%= f.hidden_field :auth,class:"form-control",id:'auth' %>
+        <%= f.hidden_field :auth,class:"form-control",id:'auth' %>
         <div class="form-group">
           <label class="col-sm-5 control-label">权限：</label>
           <div class="col-sm-3">
@@ -153,6 +210,14 @@ if($('#status').val()=='1')
                     </div>
                   </td>
                 </tr>
+                <tr>
+                  <td>
+                    <div class="icheckbox i-checks">
+                      <label>
+                        <input type="checkbox" id="all" value="all" class="leixing"> <i></i>系统管理员</label>
+                    </div>
+                  </td>
+                </tr>
               </table>
             </div>
           </div>
@@ -161,7 +226,7 @@ if($('#status').val()=='1')
         <div class="form-group">
           <label class="col-sm-5 control-label">状态：</label>
           <div class="col-sm-3">
-            <%= f.text_field :status,class:"form-control",id:'status' %>
+            <%= f.hidden_field :status,class:"form-control",id:'status' %>
             <input type="checkbox" class="js-switch" checked />
           </div>
         </div>
